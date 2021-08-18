@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var waringTextView: TextView
 
     private lateinit var imageUri: Uri
-    private val quotes = RandomQuotes()
+    private val randomGenerator = RandomGenerator()
     private var isPassLoaded: Boolean = false
     private val PICK_IMAGE = 100
     private lateinit var DATA_PATH: String
@@ -33,8 +33,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // change the Activity's title
-        // TODO: find a better way to do it ( in the manifest )
-        title = getString(R.string.title_name)
+        title = "${getString(R.string.app_name)} ${randomGenerator.getRandomEmojy()}"
 
         DATA_PATH = "${filesDir.absoluteFile}/gaypass.png"
 
@@ -57,6 +56,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+
+        // update Emojy title
+        title = "${getString(R.string.app_name)} ${randomGenerator.getRandomEmojy()}"
 
         // redraw the quote
         if (isPassLoaded)
@@ -141,7 +143,7 @@ class MainActivity : AppCompatActivity() {
     // update the Quotes TextView with a random quote
     private fun printText() {
         // update the TextView with a random quote
-        quoteTextView.text = quotes.getRandom()
+        quoteTextView.text = randomGenerator.getRandomQuote()
 
         // update the TextViews' visibility
         waringTextView.visibility = View.INVISIBLE
