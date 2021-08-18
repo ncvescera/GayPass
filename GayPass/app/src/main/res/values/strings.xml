@@ -12,5 +12,8 @@
     <string name="qrdelete_error">Unable to delete the QR :/</string>
     <string name="qrupload_success">QR uploaded successfully !</string>
     <string name="qrupload_error">Unable to upload the QR :/</string>
+    <string name="title_activity_info">Info</string>
 
+    <string name="info">This is GayPass App. It let you to manage and store your GreenPass QR-Code easly</string>
+    <string name="version">Version: v0.5 - Virgin</string>
 </resources>

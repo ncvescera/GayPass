@@ -111,6 +111,14 @@ class MainActivity : AppCompatActivity() {
 
                 // says that the qr is not loaded
                 isPassLoaded = false
+
+                true
+            }
+            R.id.menu_info -> {
+                // start the InfoActivity
+                val info = Intent(this, InfoActivity::class.java)
+                startActivityForResult(info, PICK_IMAGE)
+
                 true
             }
             else -> super.onOptionsItemSelected(item)
