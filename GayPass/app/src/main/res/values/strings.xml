@@ -6,5 +6,11 @@
     </string>
     <string name="waring_message">
         You have not selected your QR Code yet.\nRemember to take a screenshot of it and crop it as accurately as possible, try to ONLY include the QR Code.\nYou can upload it via the menu at the top right of the screen with the \'Upload QR\' item.
-        </string>
+    </string>
+
+    <string name="qrdelete_success">Successfully QR deleted !</string>
+    <string name="qrdelete_error">Unable to delete the QR :/</string>
+    <string name="qrupload_success">QR uploaded successfully !</string>
+    <string name="qrupload_error">Unable to upload the QR :/</string>
+
 </resources>

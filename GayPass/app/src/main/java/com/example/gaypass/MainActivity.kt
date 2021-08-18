@@ -89,9 +89,9 @@ class MainActivity : AppCompatActivity() {
                 val deleted: Boolean = file.delete()
 
                 if (deleted)
-                    Toast.makeText(this, "Successfully QR deleted !", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, getString(R.string.qrdelete_success), Toast.LENGTH_LONG).show()
                 else
-                    Toast.makeText(this, "Unable to delete the QR :/", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, getString(R.string.qrdelete_error), Toast.LENGTH_LONG).show()
 
                 // clear the ImageView
                 imageView.setImageDrawable(
@@ -133,7 +133,7 @@ class MainActivity : AppCompatActivity() {
             // says that the qr is loaded
             isPassLoaded = true
 
-            Toast.makeText(this, "QR uploaded successfully !", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.qrupload_success), Toast.LENGTH_LONG).show()
 
         }
     }
