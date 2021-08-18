@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // change the Activity's title
-        title = "${getString(R.string.app_name)} ${randomGenerator.getRandomEmojy()}"
+        setRandomTitle()
 
         DATA_PATH = "${filesDir.absoluteFile}/gaypass.png"
 
@@ -58,13 +58,17 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
 
         // update Emojy title
-        title = "${getString(R.string.app_name)} ${randomGenerator.getRandomEmojy()}"
+        setRandomTitle()
 
         // redraw the quote
         if (isPassLoaded)
             printText()
     }
 
+    private fun setRandomTitle() {
+        title = "${getString(R.string.app_name)} ${randomGenerator.getRandomEmojy()}"
+    }
+    
     // ------------------ OPTION MENU SECTION ------------------ //
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
