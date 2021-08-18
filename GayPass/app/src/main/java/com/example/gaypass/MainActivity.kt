@@ -1,6 +1,8 @@
 package com.example.gaypass
 
 import android.content.Intent
+import android.graphics.Color
+import android.media.Image
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
@@ -13,6 +15,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import java.io.File
 import java.io.FileOutputStream
@@ -21,12 +24,15 @@ import java.io.FileOutputStream
 class MainActivity : AppCompatActivity() {
     // GUI elements
     private lateinit var imageView:     ImageView
+    private lateinit var bg:            ImageView
     private lateinit var quoteTextView: TextView
     private lateinit var waringTextView:TextView
+    private lateinit var layout:        ConstraintLayout
 
     // utils vars
     private lateinit var imageUri: Uri
-    private          var isPassLoaded: Boolean = false
+    private          var isPassLoaded = false
+    private          var counter      = 0
 
     // utils Objects
     private           val randomGenerator = RandomGenerator()
@@ -46,9 +52,24 @@ class MainActivity : AppCompatActivity() {
         DATA_PATH = "${filesDir.absoluteFile}/gaypass.png"
         mediaPlayer = MediaPlayer.create(this, R.raw.imgay)
 
+        layout = findViewById(R.id.layout)
         imageView = findViewById(R.id.imageView)
+        bg = findViewById(R.id.bg)
         quoteTextView = findViewById(R.id.quoteText)
         waringTextView = findViewById(R.id.warningText)
+
+        // onClickListeners
+        imageView.setOnClickListener {
+            if (counter < 10)
+                counter ++
+            else {
+                // set new background
+                layout.setBackgroundResource(R.drawable.background_hidden)
+                bg.visibility = View.VISIBLE
+
+                Toast.makeText(this, "GayestMode Active !", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         // try to load the qr if previously stored
         isPassLoaded = loadPass()
