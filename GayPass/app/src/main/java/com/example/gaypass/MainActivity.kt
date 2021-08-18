@@ -1,6 +1,7 @@
 package com.example.gaypass
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -18,14 +19,21 @@ import java.io.FileOutputStream
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var imageView: ImageView
+    // GUI elements
+    private lateinit var imageView:     ImageView
     private lateinit var quoteTextView: TextView
-    private lateinit var waringTextView: TextView
+    private lateinit var waringTextView:TextView
 
+    // utils vars
     private lateinit var imageUri: Uri
-    private val randomGenerator = RandomGenerator()
-    private var isPassLoaded: Boolean = false
-    private val PICK_IMAGE = 100
+    private          var isPassLoaded: Boolean = false
+
+    // utils Objects
+    private           val randomGenerator = RandomGenerator()
+    private lateinit var mediaPlayer: MediaPlayer
+
+    // Constants
+    private          val PICK_IMAGE = 100
     private lateinit var DATA_PATH: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         setRandomTitle()
 
         DATA_PATH = "${filesDir.absoluteFile}/gaypass.png"
+        mediaPlayer = MediaPlayer.create(this, R.raw.imgay)
 
         imageView = findViewById(R.id.imageView)
         quoteTextView = findViewById(R.id.quoteText)
@@ -45,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         isPassLoaded = loadPass()
         if(isPassLoaded) {
             printText()
+            playSound()
 
         }
         else {
@@ -61,14 +71,20 @@ class MainActivity : AppCompatActivity() {
         setRandomTitle()
 
         // redraw the quote
-        if (isPassLoaded)
+        if (isPassLoaded) {
             printText()
+            playSound()
+        }
     }
 
     private fun setRandomTitle() {
         title = "${getString(R.string.app_name)} ${randomGenerator.getRandomEmojy()}"
     }
-    
+
+    private fun playSound() {
+        mediaPlayer.start()
+    }
+
     // ------------------ OPTION MENU SECTION ------------------ //
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
