@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">GayPass</string>
+    <string name="title_name">GayPass 🦄</string>
+    <string name="waring_message_it">
+        Non hai ancora selezionato il tuo codice QR.\nRicordati di fargli uno screenshot e ritagliarlo il più accuratamente possibile, cercado di includere SOLO il codice QR.\nPuoi caricarlo tramite il menu in alto a destra con la voce \'Aggiorna QR\'.
+    </string>
+    <string name="waring_message">
+        You have not selected your QR Code yet.\nRemember to take a screenshot of it and crop it as accurately as possible, try to ONLY include the QR Code.\nYou can upload it via the menu at the top right of the screen with the \'Upload QR\' item.
+        </string>
+</resources>
