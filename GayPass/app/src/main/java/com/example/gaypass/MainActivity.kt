@@ -133,20 +133,22 @@ class MainActivity : AppCompatActivity() {
 
         // update the ImageView with the selected pic (if the operation is successfully)
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
-            imageUri = data!!.data!!    // TODO: checck if a better way exists
-            imageView.setImageURI(imageUri)
+            if (data != null) {
+                imageUri = data.data!!
+                imageView.setImageURI(imageUri)
 
-            // set the Quotes TextView with a random quote
-            printText()
+                // set the Quotes TextView with a random quote
+                printText()
 
-            // save the QR Code in the Private Storage
-            saveUriToFile(imageUri)
+                // save the QR Code in the Private Storage
+                saveUriToFile(imageUri)
 
-            // says that the qr is loaded
-            isPassLoaded = true
+                // says that the qr is loaded
+                isPassLoaded = true
 
-            Toast.makeText(this, getString(R.string.qrupload_success), Toast.LENGTH_LONG).show()
-
+                Toast.makeText(this, getString(R.string.qrupload_success), Toast.LENGTH_LONG).show()
+            } else
+                Toast.makeText(this, getString(R.string.qrupload_error), Toast.LENGTH_LONG).show()
         }
     }
 
