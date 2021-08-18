@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity() {
             // save the QR Code in the Private Storage
             saveUriToFile(imageUri)
 
-            Toast.makeText(this, "QR updated successfully !", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "QR uploaded successfully !", Toast.LENGTH_LONG).show()
 
         }
     }
