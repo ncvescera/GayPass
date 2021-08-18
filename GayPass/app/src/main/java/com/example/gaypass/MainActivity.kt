@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var imageUri: Uri
     private val quotes = RandomQuotes()
-
+    private var isPassLoaded: Boolean = false
     private val PICK_IMAGE = 100
     private lateinit var DATA_PATH: String
 
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         waringTextView = findViewById(R.id.warningText)
 
         // try to load the qr if previously stored
-        var isPassLoaded = loadPass()
+        isPassLoaded = loadPass()
         if(isPassLoaded) {
             printText()
 
@@ -53,6 +53,14 @@ class MainActivity : AppCompatActivity() {
             quoteTextView.visibility = View.INVISIBLE
 
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // redraw the quote
+        if (isPassLoaded)
+            printText()
     }
 
     // ------------------ OPTION MENU SECTION ------------------ //
@@ -95,6 +103,8 @@ class MainActivity : AppCompatActivity() {
                 quoteTextView.visibility = View.INVISIBLE
                 waringTextView.visibility = View.VISIBLE
 
+                // says that the qr is not loaded
+                isPassLoaded = false
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -117,6 +127,9 @@ class MainActivity : AppCompatActivity() {
 
             // save the QR Code in the Private Storage
             saveUriToFile(imageUri)
+
+            // says that the qr is loaded
+            isPassLoaded = true
 
             Toast.makeText(this, "QR uploaded successfully !", Toast.LENGTH_LONG).show()
 
