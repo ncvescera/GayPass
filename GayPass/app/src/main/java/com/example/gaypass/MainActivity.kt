@@ -24,7 +24,7 @@ import java.io.FileOutputStream
 class MainActivity : AppCompatActivity() {
     // GUI elements
     private lateinit var imageView:     ImageView
-    private lateinit var bg:            ImageView
+    private lateinit var bg:            ConstraintLayout
     private lateinit var quoteTextView: TextView
     private lateinit var waringTextView:TextView
     private lateinit var layout:        ConstraintLayout
@@ -63,10 +63,7 @@ class MainActivity : AppCompatActivity() {
             if (counter < 10)
                 counter ++
             else {
-                // set new background
-                layout.setBackgroundResource(R.drawable.background_hidden)
-                bg.visibility = View.VISIBLE
-
+                enableGayestMode()
                 Toast.makeText(this, "GayestMode Active !", Toast.LENGTH_SHORT).show()
             }
         }
@@ -104,6 +101,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun playSound() {
         mediaPlayer.start()
+    }
+
+    private fun enableGayestMode() {
+        // set new background and wrapping color
+        layout.setBackgroundResource(R.drawable.background_hidden)
+        bg.setBackgroundColor(Color.parseColor("#E1FFFFFF"))
     }
 
     // ------------------ OPTION MENU SECTION ------------------ //
