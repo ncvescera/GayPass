@@ -161,6 +161,13 @@ class MainActivity : AppCompatActivity() {
 
                 true
             }
+            R.id.menu_settings -> {
+                // start the SettingsActivity
+                val info = Intent(this, SettingsActivity::class.java)
+                startActivityForResult(info, PICK_IMAGE)
+
+                true
+            }
             R.id.menu_info -> {
                 // start the InfoActivity
                 val info = Intent(this, InfoActivity::class.java)

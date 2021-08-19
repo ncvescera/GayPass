@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">GayPass</string>
     <string name="title_name">GayPass 🦄</string>
+
+    <!-- Missing QR warinigs -->
     <string name="waring_message_it">
         Non hai ancora selezionato il tuo codice QR.\nRicordati di fargli uno screenshot e ritagliarlo il più accuratamente possibile, cercado di includere SOLO il codice QR.\nPuoi caricarlo tramite il menu in alto a destra con la voce \'Aggiorna QR\'.
     </string>
@@ -8,12 +10,28 @@
         You have not selected your QR Code yet.\nRemember to take a screenshot of it and crop it as accurately as possible, try to ONLY include the QR Code.\nYou can upload it via the menu at the top right of the screen with the \'Upload QR\' item.
     </string>
 
+    <!-- Toasts -->
     <string name="qrdelete_success">Successfully QR deleted !</string>
     <string name="qrdelete_error">Unable to delete the QR :/</string>
     <string name="qrupload_success">QR uploaded successfully !</string>
     <string name="qrupload_error">Unable to upload the QR :/</string>
-    <string name="title_activity_info">Info</string>
 
+    <!-- Activities Titles -->
+    <string name="title_activity_info">Info</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Menu Items -->
+    <string name="menu_upload_text">Upload QR</string>
+    <string name="menu_delete_text">Delete QR</string>
+    <string name="menu_setting_text">Settings</string>
+    <string name="menu_info_text">Info</string>
+
+    <!-- Settings Names -->
+    <string name="gayestMode_text">GayestMode Always On</string>
+    <string name="sound_never_text">Never Play Sounds</string>
+    <string name="sound_onlystart_text">Play Sounds only on StartUp</string>
+
+    <!-- Info Values -->
     <string name="info">This is GayPass App. It let you to manage and store your GreenPass QR-Code easly</string>
     <string name="version">Version: v1.0 - Little Slut</string>
 </resources>
