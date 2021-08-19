@@ -10,7 +10,24 @@ class RandomGenerator {
         "I'M AUTISTIC BOY",
         "NO HOMO",
         "UR GAY",
-        "HEY BOSSSS"
+        "HEY BOSSSS" ,
+        "GAY WHO SCAN" ,
+        "WHO SAID NATURE WAS PERFECT?" ,
+        "JOIN YOUR FELLOW UNICORNS!" ,
+        "SCAN ME ALL NAUGHTY BOY" ,
+        "MLMLMLMLMLMLML" ,
+        "GOOD BOYS LET ME IN" ,
+        "PROUD FATHER OF AN ADOPTED BOY" ,
+        "ASSHOLE PASS INCLUDED" ,
+        "SCAN ONE TAKE TWO" ,
+        "PICK THE SOAP UP" ,
+        "WHO'S YOUR DADDY?" ,
+        "PREJUDICE IS A GOOD PLACE TO START" ,
+        "DISCRIMINATION IS NEVER TOO MUCH" ,
+        "ENBY PUSSY" ,
+        "GENDERFLUID COCKTAIL" ,
+        "NONBINARY PASS" ,
+        "USE ME!"
     )
 
     // TODO: add more Emojys
