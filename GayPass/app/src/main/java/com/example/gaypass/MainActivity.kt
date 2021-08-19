@@ -36,7 +36,8 @@ class MainActivity : AppCompatActivity() {
 
     // utils Objects
     private           val randomGenerator = RandomGenerator()
-    private lateinit var mediaPlayer: MediaPlayer
+    private lateinit  var mediaPlayer: MediaPlayer
+    private lateinit  var settingManager: SettingsManager
 
     // Constants
     private          val PICK_IMAGE = 100
@@ -51,6 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         DATA_PATH = "${filesDir.absoluteFile}/gaypass.png"
         mediaPlayer = MediaPlayer.create(this, R.raw.imgay)
+        settingManager = SettingsManager(this)
 
         layout = findViewById(R.id.layout)
         imageView = findViewById(R.id.imageView)
@@ -80,6 +82,10 @@ class MainActivity : AppCompatActivity() {
             quoteTextView.visibility = View.INVISIBLE
 
         }
+
+        // check if always GayestMode
+        if (settingManager.gayestModeAlways)
+            enableGayestMode()
     }
 
     override fun onResume() {
@@ -100,7 +106,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun playSound() {
-        mediaPlayer.start()
+        if (settingManager.soundNever == false)
+            mediaPlayer.start()
     }
 
     private fun enableGayestMode() {
