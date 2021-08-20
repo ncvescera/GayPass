@@ -101,6 +101,12 @@ class MainActivity : AppCompatActivity() {
         // update Emojy title
         setRandomTitle()
 
+        // check if GayestMode Always On
+        if (settingManager.gayestModeAlways)
+            enableGayestMode()
+        else
+            disableGayestMode()
+
         // redraw the quote
         if (isPassLoaded) {
             printText()
@@ -127,6 +133,12 @@ class MainActivity : AppCompatActivity() {
         // set new background and wrapping color
         layout.setBackgroundResource(R.drawable.background_hidden)
         bg.setBackgroundColor(Color.parseColor("#E1FFFFFF"))
+    }
+
+    private fun disableGayestMode() {
+        layout.background = null
+        bg.setBackgroundColor(Color.parseColor("#00FFFFFF"))
+
     }
 
     // ------------------ OPTION MENU SECTION ------------------ //

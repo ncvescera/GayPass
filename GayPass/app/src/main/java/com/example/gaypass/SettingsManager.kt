@@ -11,7 +11,7 @@ class SettingsManager(context: Context) {
 
 
     init {
-        sharedPref = activity.getPreferences(Context.MODE_PRIVATE)
+        sharedPref = activity.getSharedPreferences("settings", Context.MODE_PRIVATE)
 
     }
 
@@ -21,14 +21,31 @@ class SettingsManager(context: Context) {
     private val soundNever_prop = object { val id = "sound_never"; val value = false }
 
     // public getters
-    val gayestModeAlways: Boolean
+    var gayestModeAlways: Boolean
         get() = sharedPref.getBoolean(gayestModeAlways_prop.id, gayestModeAlways_prop.value)
+        set(value) {
+            with (sharedPref.edit()) {
+                putBoolean(gayestModeAlways_prop.id, value)
+                apply()
+            }
+        }
 
-    val soundOnlyOnStart: Boolean
+    var soundOnlyOnStart: Boolean
         get() = sharedPref.getBoolean(soundOnlyOnStart_prop.id, soundOnlyOnStart_prop.value)
+        set(value) {
+            with (sharedPref.edit()) {
+                putBoolean(soundOnlyOnStart_prop.id, value)
+                apply()
+            }
+        }
 
-    val soundNever: Boolean
+    var soundNever: Boolean
         get() = sharedPref.getBoolean(soundNever_prop.id, soundNever_prop.value)
-
+        set(value) {
+            with (sharedPref.edit()) {
+                putBoolean(soundNever_prop.id, value)
+                apply()
+            }
+        }
 
 }
