@@ -33,5 +33,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/gayestMode" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/sound_onlyonstart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/sound_onlystart_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sound_never" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

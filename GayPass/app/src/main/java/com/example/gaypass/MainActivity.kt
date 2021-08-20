@@ -110,7 +110,10 @@ class MainActivity : AppCompatActivity() {
         // redraw the quote
         if (isPassLoaded) {
             printText()
-            playSound()
+
+            // Sounds Only on StrtUp
+            if (settingManager.soundOnlyOnStart == false)
+                playSound()
         }
     }
 
