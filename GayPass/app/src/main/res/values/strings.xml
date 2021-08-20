@@ -15,6 +15,8 @@
     <string name="qrdelete_error">Unable to delete the QR :/</string>
     <string name="qrupload_success">QR uploaded successfully !</string>
     <string name="qrupload_error">Unable to upload the QR :/</string>
+    <string name="lowaudio_warning">Music volume is too low, you could\'t hear the amazing sound !</string>
+
 
     <!-- Activities Titles -->
     <string name="title_activity_info">Info</string>

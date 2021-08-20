@@ -1,12 +1,14 @@
 package com.example.gaypass
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.media.Image
+import android.media.AudioManager
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -36,6 +38,7 @@ class MainActivity : AppCompatActivity() {
 
     // utils Objects
     private           val randomGenerator = RandomGenerator()
+    private lateinit  var audioManager: AudioManager
     private lateinit  var mediaPlayer: MediaPlayer
     private lateinit  var settingManager: SettingsManager
 
@@ -51,9 +54,13 @@ class MainActivity : AppCompatActivity() {
         setRandomTitle()
 
         DATA_PATH = "${filesDir.absoluteFile}/gaypass.png"
+
+        // utils Object init
         mediaPlayer = MediaPlayer.create(this, R.raw.imgay)
         settingManager = SettingsManager(this)
+        audioManager =  getSystemService(android.content.Context.AUDIO_SERVICE) as AudioManager
 
+        // GUI getting refs
         layout = findViewById(R.id.layout)
         imageView = findViewById(R.id.imageView)
         bg = findViewById(R.id.bg)
@@ -106,6 +113,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun playSound() {
+        // check volume level
+        val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
+        if (currentVolume <= 5)
+            Toast.makeText(this, getString(R.string.lowaudio_warning), Toast.LENGTH_SHORT).show()
+
+        // play sound
         if (settingManager.soundNever == false)
             mediaPlayer.start()
     }
