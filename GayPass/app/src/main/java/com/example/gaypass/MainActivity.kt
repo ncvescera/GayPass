@@ -139,7 +139,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun disableGayestMode() {
-        layout.background = null
+        layout.setBackgroundResource(R.drawable.gradient_background_verygay)
         bg.setBackgroundColor(Color.parseColor("#00FFFFFF"))
 
     }
