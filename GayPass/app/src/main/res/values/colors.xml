@@ -3,4 +3,17 @@
     <color name="colorPrimary">#faaca8</color>
     <color name="colorPrimaryDark">#f2766f</color>
     <color name="colorAccent">#b32017</color>
+
+    <color name="colorPrimaryVeryGay">#6a11cb</color>
+    <color name="colorPrimaryDarkVeryGay">#2575fc</color>
+    <color name="colorAccentVeryGay">#ed2fe7</color>
+
+    <color name="colorPrimaryLatente">#adadad</color>
+    <color name="colorPrimaryDarkLatente">#aa94b0</color>
+    <color name="colorAccentLatente">#893c9e</color>
+
+    <color name="colorPrimaryNight">#000</color>
+    <color name="colorPrimaryDarkNight">#000</color>
+    <color name="colorAccentNight">#ffffff</color>
+    <color name="background_colorNight">#131313</color>
 </resources>
