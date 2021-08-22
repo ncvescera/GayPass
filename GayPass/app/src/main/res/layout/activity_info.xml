@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_info_theme_gaymanontroppo"
     tools:context=".InfoActivity">
 
     <ImageView
@@ -43,5 +44,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/warningText" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

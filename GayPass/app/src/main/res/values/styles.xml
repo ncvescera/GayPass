@@ -1,4 +1,4 @@
-<resources>
+ <resources>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
@@ -6,4 +6,33 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+     <style name="VeryGay" parent="Theme.AppCompat.Light.DarkActionBar">
+         <!-- Customize your theme here. -->
+         <item name="colorPrimary">@color/colorPrimaryVeryGay</item>
+         <item name="colorPrimaryDark">@color/colorPrimaryDarkVeryGay</item>
+         <item name="colorAccent">@color/colorAccentVeryGay</item>
+     </style>
+
+     <style name="GayLatente" parent="Theme.AppCompat.Light.DarkActionBar">
+         <!-- Customize your theme here. -->
+         <item name="colorPrimary">@color/colorPrimaryLatente</item>
+         <item name="colorPrimaryDark">@color/colorPrimaryDarkLatente</item>
+         <item name="colorAccent">@color/colorAccentLatente</item>
+     </style>
+
+     <style name="DarkMode" parent="Theme.AppCompat.Light.DarkActionBar">
+         <!-- Customize your theme here. -->
+         <item name="colorPrimary">@color/colorPrimaryNight</item>
+         <item name="colorPrimaryDark">@color/colorPrimaryDarkNight</item>
+         <item name="colorAccent">@color/colorAccentNight</item>
+         <item name="backgroundColor">@color/background_colorNight</item>
+     </style>
+
+     <style name="GayMaNonTroppo" parent="Theme.AppCompat.Light.DarkActionBar">
+         <!-- Customize your theme here. -->
+         <item name="colorPrimary">@color/colorPrimaryMaNonTroppo</item>
+         <item name="colorPrimaryDark">@color/colorPrimaryDarkMaNonTroppo</item>
+         <item name="colorAccent">@color/colorAccentMaNonTroppo</item>
+     </style>
 </resources>
