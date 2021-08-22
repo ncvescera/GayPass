@@ -28,4 +28,11 @@
          <item name="colorAccent">@color/colorAccentNight</item>
          <item name="backgroundColor">@color/background_colorNight</item>
      </style>
+
+     <style name="GayMaNonTroppo" parent="Theme.AppCompat.Light.DarkActionBar">
+         <!-- Customize your theme here. -->
+         <item name="colorPrimary">@color/colorPrimaryMaNonTroppo</item>
+         <item name="colorPrimaryDark">@color/colorPrimaryDarkMaNonTroppo</item>
+         <item name="colorAccent">@color/colorAccentMaNonTroppo</item>
+     </style>
 </resources>

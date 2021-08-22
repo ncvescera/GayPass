@@ -16,4 +16,8 @@
     <color name="colorPrimaryDarkNight">#000</color>
     <color name="colorAccentNight">#ffffff</color>
     <color name="background_colorNight">#131313</color>
+
+    <color name="colorPrimaryMaNonTroppo">#fff6ef</color>
+    <color name="colorPrimaryDarkMaNonTroppo">#c1d5dc</color>
+    <color name="colorAccentMaNonTroppo">#edcfab</color>
 </resources>
