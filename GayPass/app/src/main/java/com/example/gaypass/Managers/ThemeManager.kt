@@ -1,19 +1,17 @@
-package com.example.gaypass
+package com.example.gaypass.Managers
 
 import android.app.Activity
-import android.app.Application
 import android.content.Context
-import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.appcompat.app.ActionBar
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
+import com.example.gaypass.*
+import com.example.gaypass.Utils.Theme
 
 class ThemeManager(private val context: Context, private var window: Window, private var actionBar: ActionBar?, private var view: View) {
     private var settingsManager: SettingsManager = SettingsManager(context)

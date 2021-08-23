@@ -1,9 +1,9 @@
-package com.example.gaypass
+package com.example.gaypass.Managers
 
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
+import com.example.gaypass.R
 
 class SettingsManager(context: Context) {
     private var activity = context as Activity
@@ -16,7 +16,9 @@ class SettingsManager(context: Context) {
     }
 
     // Proprieties for identifying the value on the SharedProprieties
-    private val currentTheme_prop = object { val id = "current_theme"; val value = R.style.AppTheme }
+    private val currentTheme_prop = object { val id = "current_theme"; val value =
+        R.style.AppTheme
+    }
     private val soundOnlyOnStart_prop = object { val id = "sound_onlystart"; val value = false }
     private val soundNever_prop = object { val id = "sound_never"; val value = false }
 

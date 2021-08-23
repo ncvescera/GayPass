@@ -1,4 +1,4 @@
-package com.example.gaypass
+package com.example.gaypass.Utils
 
 class RandomGenerator {
     // TODO: add new Quotes

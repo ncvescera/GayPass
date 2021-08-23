@@ -2,7 +2,6 @@ package com.example.gaypass
 
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.net.Uri
@@ -18,9 +17,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import com.example.gaypass.Managers.SettingsManager
+import com.example.gaypass.Managers.ThemeManager
+import com.example.gaypass.Utils.RandomGenerator
 import java.io.File
 import java.io.FileOutputStream
 

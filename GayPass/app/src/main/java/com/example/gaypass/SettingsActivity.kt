@@ -1,11 +1,11 @@
 package com.example.gaypass
 
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
+import com.example.gaypass.Managers.SettingsManager
+import com.example.gaypass.Managers.ThemeManager
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 
