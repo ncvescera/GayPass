@@ -29,7 +29,9 @@
     <string name="menu_info_text">Info</string>
 
     <!-- Settings Names -->
-    <string name="gayestMode_text">GayestMode Always On</string>
+    <string name="defaultTheme_text">Default Theme</string>
+    <string name="gayestTheme_text">Gayest Theme</string>
+    <string name="gayLatenteTheme_text">GayLatente Theme</string>
     <string name="sound_never_text">Never Play Sounds</string>
     <string name="sound_onlystart_text">Play Sounds only on StartUp</string>
 

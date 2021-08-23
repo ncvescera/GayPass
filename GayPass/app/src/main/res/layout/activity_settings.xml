@@ -5,35 +5,89 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_settings_theme_gaymanontroppo"
-    tools:context=".SettingsActivity">
+    tools:context=".SettingsActivity"
+    android:id="@+id/settings_container">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="270dp"
-        android:layout_height="548dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="16dp"
+        android:layout_marginRight="20dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/gayestMode"
+        <TextView
+            android:id="@+id/textView_themes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/gayestMode_text"
+            android:fontFamily="sans-serif-black"
+            android:text="Themes"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup_themes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_themes">
+
+            <RadioButton
+                android:id="@+id/default_theme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onRadioButtonClicked"
+                android:text="@string/defaultTheme_text" />
+
+            <RadioButton
+                android:id="@+id/gayest_theme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onRadioButtonClicked"
+                android:text="@string/gayestTheme_text" />
+
+            <RadioButton
+                android:id="@+id/gayLatente_theme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onRadioButtonClicked"
+                android:text="@string/gayLatenteTheme_text" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView_sounds"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Sounds"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup_themes" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/sound_never"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:text="@string/sound_never_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gayestMode" />
+            app:layout_constraintTop_toBottomOf="@+id/textView_sounds" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/sound_onlyonstart"
@@ -43,6 +97,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sound_never" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,46 +1,42 @@
 package com.example.gaypass
 
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.widget.CompoundButton
-import android.widget.Toast
+import android.view.View
+import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 
 class SettingsActivity : AppCompatActivity() {
-    private lateinit var gayestModeAlwaysOn: SwitchMaterial
     private lateinit var neverPlaySounds: SwitchMaterial
     private lateinit var soundsOnlyOnStart: SwitchMaterial
 
     private lateinit  var settingManager: SettingsManager
+    private lateinit  var themeManager: ThemeManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        // get SettingManager
+        // utils Managers
         settingManager = SettingsManager(this)
+        themeManager = ThemeManager(this, window, supportActionBar, findViewById(R.id.settings_container))
+
+        // apply theme
+        themeManager.applyTheme()
 
         // GUI get refs
-        gayestModeAlwaysOn = findViewById(R.id.gayestMode)
         neverPlaySounds = findViewById(R.id.sound_never)
         soundsOnlyOnStart = findViewById(R.id.sound_onlyonstart)
 
         // set switches with stored value
-        gayestModeAlwaysOn.isChecked    = settingManager.gayestModeAlways
+        intiRadioButtons()
         neverPlaySounds.isChecked       = settingManager.soundNever
         soundsOnlyOnStart.isChecked     = settingManager.soundOnlyOnStart
 
         // onClickListeners
-        // --- GAYESTMODE --- //
-        gayestModeAlwaysOn.setOnClickListener {
-            val this_button = it as SwitchMaterial
-
-            // set new Value
-            settingManager.gayestModeAlways = this_button.isChecked
-
-        }
-
         // --- Never Play Sounds --- //
         neverPlaySounds.setOnClickListener {
             val this_button = it as SwitchMaterial
@@ -61,6 +57,53 @@ class SettingsActivity : AppCompatActivity() {
 
             neverPlaySounds.isChecked = false
             settingManager.soundNever = false
+        }
+    }
+
+    // --- RADIO BUTTON SECTION --- //
+    // initialize radio buttons (themes) with the selected theme
+    private fun intiRadioButtons() {
+        when(settingManager.currentTheme) {
+            ThemeManager.DEFAULT -> {
+                findViewById<RadioButton>(R.id.default_theme).isChecked = true
+            }
+            ThemeManager.GAYEST_THEME -> {
+                findViewById<RadioButton>(R.id.gayest_theme).isChecked = true
+            }
+            ThemeManager.GAYLATENTE_THEME -> {
+                findViewById<RadioButton>(R.id.gayLatente_theme).isChecked = true
+            }
+        }
+    }
+
+    // function to handle the theme selection
+    // is setted on the radiobutton's field onClickListener in the activiry_setting.xml file
+    fun onRadioButtonClicked(view: View) {
+        if (view is RadioButton) {
+            // Is the button now checked?
+            val checked = view.isChecked
+
+            // Check which radio button was clicked
+            when (view.getId()) {
+                R.id.default_theme -> {
+                    // Apply DEFAULT Theme
+                    if (checked) {
+                        themeManager.theme = ThemeManager.DEFAULT
+                    }
+                }
+                R.id.gayest_theme -> {
+                    // Apply GAYEST Theme
+                    if (checked) {
+                        themeManager.theme = ThemeManager.GAYEST_THEME
+                    }
+                }
+                R.id.gayLatente_theme -> {
+                    // Apply GAYLATENTE Theme
+                    if (checked) {
+                        themeManager.theme = ThemeManager.GAYLATENTE_THEME
+                    }
+                }
+            }
         }
     }
 }

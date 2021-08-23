@@ -16,16 +16,16 @@ class SettingsManager(context: Context) {
     }
 
     // Proprieties for identifying the value on the SharedProprieties
-    private val gayestModeAlways_prop = object { val id = "gmode_always"; val value = false }
+    private val currentTheme_prop = object { val id = "current_theme"; val value = R.style.AppTheme }
     private val soundOnlyOnStart_prop = object { val id = "sound_onlystart"; val value = false }
     private val soundNever_prop = object { val id = "sound_never"; val value = false }
 
     // public getters
-    var gayestModeAlways: Boolean
-        get() = sharedPref.getBoolean(gayestModeAlways_prop.id, gayestModeAlways_prop.value)
+    var currentTheme: Int
+        get() = sharedPref.getInt(currentTheme_prop.id, currentTheme_prop.value)
         set(value) {
             with (sharedPref.edit()) {
-                putBoolean(gayestModeAlways_prop.id, value)
+                putInt(currentTheme_prop.id, value)
                 apply()
             }
         }

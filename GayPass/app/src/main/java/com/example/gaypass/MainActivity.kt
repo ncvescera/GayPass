@@ -1,14 +1,14 @@
 package com.example.gaypass
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -16,7 +16,9 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import java.io.File
@@ -41,6 +43,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit  var audioManager: AudioManager
     private lateinit  var mediaPlayer: MediaPlayer
     private lateinit  var settingManager: SettingsManager
+    private lateinit var themeManager: ThemeManager
 
     // Constants
     private          val PICK_IMAGE = 100
@@ -55,9 +58,14 @@ class MainActivity : AppCompatActivity() {
 
         DATA_PATH = "${filesDir.absoluteFile}/gaypass.png"
 
+        // init settingManager & setting the theme
+        settingManager = SettingsManager(this)
+        themeManager = ThemeManager(this, window, supportActionBar, findViewById(R.id.layout))
+
+        themeManager.applyTheme()
+
         // utils Object init
         mediaPlayer = MediaPlayer.create(this, R.raw.imgay)
-        settingManager = SettingsManager(this)
         audioManager =  getSystemService(android.content.Context.AUDIO_SERVICE) as AudioManager
 
         // GUI getting refs
@@ -91,21 +99,29 @@ class MainActivity : AppCompatActivity() {
         }
 
         // check if always GayestMode
-        if (settingManager.gayestModeAlways)
+        /*
+        if (settingManager.gayest_theme)
             enableGayestMode()
+
+         */
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onResume() {
         super.onResume()
+
+        themeManager.applyTheme()
 
         // update Emojy title
         setRandomTitle()
 
         // check if GayestMode Always On
-        if (settingManager.gayestModeAlways)
+        /*
+        if (settingManager.gayest_theme)
             enableGayestMode()
         else
             disableGayestMode()
+        */
 
         // redraw the quote
         if (isPassLoaded) {
@@ -115,6 +131,8 @@ class MainActivity : AppCompatActivity() {
             if (settingManager.soundOnlyOnStart == false)
                 playSound()
         }
+
+
     }
 
     private fun setRandomTitle() {
