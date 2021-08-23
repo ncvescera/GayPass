@@ -41,7 +41,31 @@ class RandomGenerator {
         "\uD83D\uDC68\u200D❤️\u200D\uD83D\uDC8B\u200D\uD83D\uDC68", // gay kiss
         "\uD83C\uDF08",                                             // rainbow
         "\uD83C\uDFF3️\u200D\uD83C\uDF08",                           // rainbowflag
-        "\uD83C\uDF6D"                                              // lollipop
+        "\uD83C\uDF6D",                                             // lollipop
+        "\uD83E\uDD20",                                             // cowboy
+        "\uD83D\uDCA6",                                             //  sweat droplets
+        "\uD83D\uDC81",                                             //  woman tipping hand
+        "\uD83D\uDC77",                                             // man construction worker
+        "\uD83E\uDD34",                                             // prince
+        "\uD83D\uDC78",                                             // princess
+        "\uD83E\uDDB8",                                             // superhero
+        "\uD83E\uDDB9",                                             // supervillan
+        "\uD83E\uDDDA",                                             // fairy
+        "\uD83E\uDDDC",                                             // merperson
+        "\uD83D\uDC6F",                                             // woman bunny
+        "\uD83E\uDD38",                                             // person doing cartwheel
+        "\uD83D\uDC6C",                                             // 2 man holding hands
+        "\uD83D\uDC6D",                                             // 2 women holding hands
+        "\uD83D\uDC37",                                             // pig face
+        "\uD83E\uDDA9",                                             // flamingo
+        "\uD83E\uDD8B",                                             // butterfly
+        "\uD83C\uDF46",                                             // aubergine
+        "\uD83E\uDD52",                                             // cucumber
+        "\uD83E\uDD56",                                             // baguette
+        "\uD83C\uDF2D",                                             // hot dog
+        "\uD83C\uDFBA",                                             // trumpet
+        "\u26A7",                                                   // Trasgender symbol
+        "\uD83C\uDDEB\uD83C\uDDF7"                                  // franch flag
     )
 
     fun getRandomQuote(): String {
