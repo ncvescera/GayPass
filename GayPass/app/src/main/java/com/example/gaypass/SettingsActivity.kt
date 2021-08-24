@@ -73,6 +73,9 @@ class SettingsActivity : AppCompatActivity() {
             ThemeManager.GAYLATENTE_THEME -> {
                 findViewById<RadioButton>(R.id.gayLatente_theme).isChecked = true
             }
+            ThemeManager.RAINBOW_THEME -> {
+                findViewById<RadioButton>(R.id.rainbow_theme).isChecked = true
+            }
         }
     }
 
@@ -101,6 +104,12 @@ class SettingsActivity : AppCompatActivity() {
                     // Apply GAYLATENTE Theme
                     if (checked) {
                         themeManager.theme = ThemeManager.GAYLATENTE_THEME
+                    }
+                }
+                R.id.rainbow_theme -> {
+                    // Apply GAYLATENTE Theme
+                    if (checked) {
+                        themeManager.theme = ThemeManager.RAINBOW_THEME
                     }
                 }
             }

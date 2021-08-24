@@ -30,8 +30,10 @@
 
     <!-- Settings Names -->
     <string name="defaultTheme_text">Default Theme</string>
+    <string name="rainbowTheme_text">Rainbow Theme</string>
     <string name="gayestTheme_text">Gayest Theme</string>
     <string name="gayLatenteTheme_text">GayLatente Theme</string>
+
     <string name="sound_never_text">Never Play Sounds</string>
     <string name="sound_onlystart_text">Play Sounds only on StartUp</string>
 

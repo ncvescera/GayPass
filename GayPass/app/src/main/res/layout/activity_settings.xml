@@ -51,6 +51,13 @@
                 android:text="@string/defaultTheme_text" />
 
             <RadioButton
+                android:id="@+id/rainbow_theme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onRadioButtonClicked"
+                android:text="@string/rainbowTheme_text" />
+
+            <RadioButton
                 android:id="@+id/gayest_theme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

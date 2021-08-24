@@ -20,11 +20,47 @@ class ThemeManager(private val context: Context, private var window: Window, pri
         const val DEFAULT = 0
         const val GAYEST_THEME = 1
         const val GAYLATENTE_THEME = 2
+        const val RAINBOW_THEME = 3
     }
 
-    private val default_theme = Theme(R.color.colorPrimary, R.color.colorPrimaryDark, R.color.colorAccent)
-    private val gayest_theme = Theme(R.color.colorPrimaryVeryGay, R.color.colorPrimaryDarkVeryGay, R.color.colorAccentVeryGay)
-    private val gayLatente_theme = Theme(R.color.colorPrimaryLatente, R.color.colorPrimaryDarkLatente, R.color.colorAccentLatente)
+    // --- THEME DEFINITIONS --- //
+    private val default_theme = Theme(
+        primary = R.color.colorPrimaryDefault,
+        primaryDark = R.color.colorPrimaryDarkDefault,
+        accent = R.color.colorAccentDefault,
+        bgText = R.color.colorBgDefault,
+        bgDrawable = null
+
+    )
+    private val rainbow_theme = Theme(
+        primary = R.color.colorPrimaryRainbow,
+        primaryDark = R.color.colorPrimaryDarkRainbow,
+        accent = R.color.colorAccentRainbow,
+        bgText = R.color.colorBgRainbow,
+        bgDrawable = listOf(R.drawable.background_rainbow)
+    )
+    private val gayest_theme = Theme(
+        primary = R.color.colorPrimaryVeryGay,
+        primaryDark = R.color.colorPrimaryDarkVeryGay,
+        accent = R.color.colorAccentVeryGay,
+        bgText = R.color.colorBgRainbow,
+        bgDrawable = listOf(
+            R.drawable.background_main_theme_verygay,
+            R.drawable.background_info_theme_verygay,
+            R.drawable.background_settings_theme_verygay
+        )
+    )
+    private val gayLatente_theme = Theme(
+        primary = R.color.colorPrimaryLatente,
+        primaryDark = R.color.colorPrimaryDarkLatente,
+        accent = R.color.colorAccentLatente,
+        bgText = R.color.colorBgRainbow,
+        bgDrawable = listOf(
+            R.drawable.background_main_theme_gaylatente,
+            R.drawable.background_info_theme_gaylatente,
+            R.drawable.background_settings_theme_gaylatente
+        )
+    )
 
     var theme: Int
         get() {
@@ -35,84 +71,92 @@ class ThemeManager(private val context: Context, private var window: Window, pri
             applyTheme()
         }
 
-    private fun background() {
-        when (context as Activity) {
-            is MainActivity -> {
+    fun applyTheme() {
+        // get the center screen elements box
+        var box_maincontent = (view as ViewGroup)[0]
 
+        // choose which theme to apply
+        when (settingsManager.currentTheme) {
+            DEFAULT -> {
+                // set nav & status bars color
+                window.statusBarColor = ContextCompat.getColor(context, default_theme.primary)
+                actionBar?.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(context, default_theme.primaryDark)))
+
+                // set custom activity bg
+                applyCustomBgDrawable(default_theme.bgDrawable)
+
+                // set the content box color
+                box_maincontent.background = ColorDrawable(ContextCompat.getColor(context, default_theme.bgText))
             }
-            is InfoActivity -> {
 
+            GAYEST_THEME -> {
+                // set nav & status bars color
+                window.statusBarColor = ContextCompat.getColor(context, gayest_theme.primary)
+                actionBar?.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(context, gayest_theme.primaryDark)))
+
+                // set custom activity bg
+                applyCustomBgDrawable(gayest_theme.bgDrawable)
+
+                // set the content box color
+                box_maincontent.background = ColorDrawable(ContextCompat.getColor(context, gayest_theme.bgText))
             }
-            is SettingsActivity -> {
 
+            GAYLATENTE_THEME -> {
+                // set nav & status bars color
+                window.statusBarColor = ContextCompat.getColor(context, gayLatente_theme.primary)
+                actionBar?.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(context, gayLatente_theme.primaryDark)))
+
+                // set custom activity bg
+                applyCustomBgDrawable(gayLatente_theme.bgDrawable)
+
+                // set the content box color
+                box_maincontent.background = ColorDrawable(ContextCompat.getColor(context, gayLatente_theme.bgText))
+            }
+
+            RAINBOW_THEME -> {
+                // set nav & status bars color
+                window.statusBarColor = ContextCompat.getColor(context, rainbow_theme.primary)
+                actionBar?.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(context, rainbow_theme.primaryDark)))
+
+                // set custom activity bg
+                applyCustomBgDrawable(rainbow_theme.bgDrawable)
+
+                // set the content box color
+                box_maincontent.background = ColorDrawable(ContextCompat.getColor(context, rainbow_theme.bgText))
             }
         }
     }
 
-    fun applyTheme() {
-        when (settingsManager.currentTheme) {
-            DEFAULT -> {
-                window.statusBarColor = ContextCompat.getColor(context, default_theme.primary)
-                actionBar?.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(context, default_theme.primaryDark)))
-
-                when (context as Activity) {
-                    is MainActivity -> {
-                        view.background = context.getDrawable(R.drawable.background_main_theme_gaymanontroppo)
-                    }
-                    is InfoActivity -> {
-                        view.background = context.getDrawable(R.drawable.background_info_theme_gaymanontroppo)
-                    }
-                    is SettingsActivity -> {
-                        view.background = context.getDrawable(R.drawable.background_settings_theme_gaymanontroppo)
-                    }
-                }
-
-                // set the content box color
-                var box_maincontent = (view as ViewGroup).get(0)
-                box_maincontent.background = ColorDrawable(Color.parseColor("#C1FFFFFF"))
+    private fun applyCustomBgDrawable(bgs: List<Int>?) {
+        when {
+            bgs == null -> {
+                // no bg
+                view.background = null
             }
-            GAYEST_THEME -> {
-                // set statusBar and actionBar colors
-                window.statusBarColor = ContextCompat.getColor(context, gayest_theme.primary)
-                actionBar?.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(context, gayest_theme.primaryDark)))
-
+            bgs.size == 1 -> {
+                // one bg for all activityes
+                view.background = ContextCompat.getDrawable(context, bgs[0])
+            }
+            bgs.size == 3 -> {
                 // set custom bg for different activityes
                 when (context as Activity) {
                     is MainActivity -> {
-                        view.background = context.getDrawable(R.drawable.background_main_theme_verygay)
+                        view.background = ContextCompat.getDrawable(context, bgs[0])
                     }
                     is InfoActivity -> {
-                        view.background = context.getDrawable(R.drawable.background_info_theme_verygay)
+                        view.background = ContextCompat.getDrawable(context, bgs[1])
                     }
                     is SettingsActivity -> {
-                        view.background = context.getDrawable(R.drawable.background_settings_theme_verygay)
+                        view.background = ContextCompat.getDrawable(context, bgs[2])
                     }
                 }
-
-                // set the content box color
-                var box_maincontent = (view as ViewGroup).get(0)
-                box_maincontent.background = ColorDrawable(Color.parseColor("#90FFFFFF"))
             }
-            GAYLATENTE_THEME -> {
-                window.statusBarColor = ContextCompat.getColor(context, gayLatente_theme.primary)
-                actionBar?.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(context, gayLatente_theme.primaryDark)))
-
-                when (context as Activity) {
-                    is MainActivity -> {
-                        view.background = context.getDrawable(R.drawable.background_main_theme_gaylatente)
-                    }
-                    is InfoActivity -> {
-                        view.background = context.getDrawable(R.drawable.background_info_theme_gaylatente)
-                    }
-                    is SettingsActivity -> {
-                        view.background = context.getDrawable(R.drawable.background_settings_theme_gaylatente)
-                    }
-                }
-
-                // set the content box color
-                var box_maincontent = (view as ViewGroup).get(0)
-                box_maincontent.background = ColorDrawable(Color.parseColor("#C0FFFFFF"))
+            else -> {
+                // wrong number of elements
+                // no bg
+                view.background = null
             }
         }
+
     }
 }

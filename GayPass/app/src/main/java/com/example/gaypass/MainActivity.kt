@@ -81,8 +81,8 @@ class MainActivity : AppCompatActivity() {
             if (counter < 10)
                 counter ++
             else {
-                enableGayestMode()
-                Toast.makeText(this, "GayestMode Active !", Toast.LENGTH_SHORT).show()
+                //enableGayestMode()
+                //Toast.makeText(this, "GayestMode Active !", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -153,7 +153,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun enableGayestMode() {
         // set new background and wrapping color
-        layout.setBackgroundResource(R.drawable.background_hidden)
+        layout.setBackgroundResource(R.drawable.background_rainbow)
         bg.setBackgroundColor(Color.parseColor("#E1FFFFFF"))
     }
 

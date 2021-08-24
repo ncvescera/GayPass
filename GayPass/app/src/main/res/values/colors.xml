@@ -1,23 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#faaca8</color>
-    <color name="colorPrimaryDark">#f2766f</color>
-    <color name="colorAccent">#b32017</color>
+    <!-- DEFAULT -->
+    <color name="colorPrimaryDefault">#C55FFC</color>
+    <color name="colorPrimaryDarkDefault">#A32EFF</color>
+    <color name="colorAccentDefault">#2575FC</color>
+    <color name="colorBgDefault">#00FFFFFF</color>
 
+    <!-- RAINBOW -->
+    <color name="colorPrimaryRainbow">#C55FFC</color>
+    <color name="colorPrimaryDarkRainbow">#A32EFF</color>
+    <color name="colorAccentRainbow">#2575FC</color>
+    <color name="colorBgRainbow">#E0FFFFFF</color>
+
+    <!-- GAY MA NON TROPPO -->
+    <color name="colorPrimaryMaNonTroppo">#faaca8</color>
+    <color name="colorPrimaryDarkMaNonTroppo">#f2766f</color>
+    <color name="colorAccentMaNonTroppo">#b32017</color>
+
+    <!-- VERY GAY -->
     <color name="colorPrimaryVeryGay">#6a11cb</color>
     <color name="colorPrimaryDarkVeryGay">#2575fc</color>
     <color name="colorAccentVeryGay">#ed2fe7</color>
 
+    <!-- GAY LATENTE -->
     <color name="colorPrimaryLatente">#adadad</color>
     <color name="colorPrimaryDarkLatente">#aa94b0</color>
     <color name="colorAccentLatente">#893c9e</color>
 
+    <!-- NIGHT -->
     <color name="colorPrimaryNight">#000</color>
     <color name="colorPrimaryDarkNight">#000</color>
     <color name="colorAccentNight">#ffffff</color>
     <color name="background_colorNight">#131313</color>
 
-    <color name="colorPrimaryMaNonTroppo">#fff6ef</color>
-    <color name="colorPrimaryDarkMaNonTroppo">#c1d5dc</color>
-    <color name="colorAccentMaNonTroppo">#edcfab</color>
+    <!--PURE -->
+    <color name="colorPrimaryPure">#fff6ef</color>
+    <color name="colorPrimaryDarkPure">#c1d5dc</color>
+    <color name="colorAccentMaNonPure">#edcfab</color>
 </resources>
