@@ -15,14 +15,25 @@ class SettingsManager(context: Context) {
 
     }
 
+    // --- PROP SECTION --- //
     // Proprieties for identifying the value on the SharedProprieties
+
+    // themes
     private val currentTheme_prop = object { val id = "current_theme"; val value =
         R.style.AppTheme
     }
+
+    // sounds
     private val soundOnlyOnStart_prop = object { val id = "sound_onlystart"; val value = false }
     private val soundNever_prop = object { val id = "sound_never"; val value = false }
 
-    // public getters
+    // gui
+    private val emojyOnlyOnStart_prop = object { val id = "emojy_onlystart"; val value = false }
+
+
+    // --- PUBLIC ATTRS SECTION ---//
+    // public getters & setters
+
     var currentTheme: Int
         get() = sharedPref.getInt(currentTheme_prop.id, currentTheme_prop.value)
         set(value) {
@@ -46,6 +57,15 @@ class SettingsManager(context: Context) {
         set(value) {
             with (sharedPref.edit()) {
                 putBoolean(soundNever_prop.id, value)
+                apply()
+            }
+        }
+
+    var emojyOnlyOnStart: Boolean
+        get() = sharedPref.getBoolean(emojyOnlyOnStart_prop.id, emojyOnlyOnStart_prop.value)
+        set(value) {
+            with (sharedPref.edit()) {
+                putBoolean(emojyOnlyOnStart_prop.id, value)
                 apply()
             }
         }

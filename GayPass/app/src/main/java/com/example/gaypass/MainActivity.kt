@@ -114,7 +114,8 @@ class MainActivity : AppCompatActivity() {
         themeManager.applyTheme()
 
         // update Emojy title
-        setRandomTitle()
+        if (settingManager.emojyOnlyOnStart == false)
+            setRandomTitle()
 
         // check if GayestMode Always On
         /*

@@ -12,6 +12,7 @@ import com.google.android.material.switchmaterial.SwitchMaterial
 class SettingsActivity : AppCompatActivity() {
     private lateinit var neverPlaySounds: SwitchMaterial
     private lateinit var soundsOnlyOnStart: SwitchMaterial
+    private lateinit var emojyOnlyOnStart: SwitchMaterial
 
     private lateinit  var settingManager: SettingsManager
     private lateinit  var themeManager: ThemeManager
@@ -30,11 +31,13 @@ class SettingsActivity : AppCompatActivity() {
         // GUI get refs
         neverPlaySounds = findViewById(R.id.sound_never)
         soundsOnlyOnStart = findViewById(R.id.sound_onlyonstart)
+        emojyOnlyOnStart = findViewById(R.id.gui_emojyOnlyStart)
 
         // set switches with stored value
         intiRadioButtons()
         neverPlaySounds.isChecked       = settingManager.soundNever
         soundsOnlyOnStart.isChecked     = settingManager.soundOnlyOnStart
+        emojyOnlyOnStart.isChecked      = settingManager.emojyOnlyOnStart
 
         // onClickListeners
         // --- Never Play Sounds --- //
@@ -57,6 +60,14 @@ class SettingsActivity : AppCompatActivity() {
 
             neverPlaySounds.isChecked = false
             settingManager.soundNever = false
+        }
+
+        // --- Emojy Only on StartUp --- //
+        emojyOnlyOnStart.setOnClickListener {
+            val this_button = it as SwitchMaterial
+
+            // set new Value
+            settingManager.emojyOnlyOnStart = this_button.isChecked
         }
     }
 

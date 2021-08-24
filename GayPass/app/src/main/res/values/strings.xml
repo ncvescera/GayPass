@@ -37,6 +37,8 @@
     <string name="sound_never_text">Never Play Sounds</string>
     <string name="sound_onlystart_text">Play Sounds only on StartUp</string>
 
+    <string name="gui_emojyOnlyStartup">Random Emojy only on StartUp</string>
+
     <!-- Info Values -->
     <string name="info">This is GayPass App. It lets you to manage and store your GreenPass QR-Code easly</string>
     <string name="version">Version: v2.0 - Big Slut</string>
