@@ -19,9 +19,7 @@ class SettingsManager(context: Context) {
     // Proprieties for identifying the value on the SharedProprieties
 
     // themes
-    private val currentTheme_prop = object { val id = "current_theme"; val value =
-        R.style.AppTheme
-    }
+    private val currentTheme_prop = object { val id = "current_theme"; val value = 0 }
 
     // sounds
     private val soundOnlyOnStart_prop = object { val id = "sound_onlystart"; val value = false }

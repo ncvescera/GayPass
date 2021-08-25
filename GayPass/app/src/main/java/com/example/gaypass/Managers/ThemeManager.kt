@@ -15,22 +15,13 @@ class ThemeManager(
 ) {
     private var settingsManager: SettingsManager = SettingsManager(context)
 
-    // statics vars
-    // seems useless ...
-    companion object {
-        const val DEFAULT           = 0
-        const val GAYEST_THEME      = 1
-        const val GAYLATENTE_THEME  = 2
-        const val RAINBOW_THEME     = 3
-        const val GAYMANONTROPPO_THEME     = 4
-    }
-
-     val themes = listOf<Theme>(
-         DefaultTheme(context, window, view, actionBar!!),
-         RainbowTheme(context, window, view, actionBar),
-         GayestTheme(context, window, view, actionBar),
-         GayLatenteTheme(context, window, view, actionBar),
-         GayMaNonTroppoTheme(context, window, view, actionBar)
+    // all themes
+    val themes = listOf<Theme>(
+        DefaultTheme(context, window, view, actionBar!!),
+        RainbowTheme(context, window, view, actionBar),
+        GayestTheme(context, window, view, actionBar),
+        GayLatenteTheme(context, window, view, actionBar),
+        GayMaNonTroppoTheme(context, window, view, actionBar)
     )
 
     var theme: Int
