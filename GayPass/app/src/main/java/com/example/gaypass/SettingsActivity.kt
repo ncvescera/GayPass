@@ -25,7 +25,7 @@ class SettingsActivity : AppCompatActivity() {
         // utils Managers
         settingManager = SettingsManager(this)
         themeManager = ThemeManager(this, window, supportActionBar, findViewById(R.id.settings_container))
-
+        
         // apply theme
         themeManager.applyTheme()
 
