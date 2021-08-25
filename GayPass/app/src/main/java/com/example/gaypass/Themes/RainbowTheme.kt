@@ -16,7 +16,8 @@ class RainbowTheme(
         R.color.colorPrimaryDarkRainbow,
         R.color.colorAccentRainbow,
         R.color.colorBgRainbow,
-        listOf(R.drawable.background_rainbow)
+        listOf(R.drawable.background_rainbow),
+        context.getString(R.string.rainbowTheme_text)
     ) {
         override fun apply() {
             super.applyTheme(

@@ -20,7 +20,7 @@ import com.example.gaypass.MainActivity
 import com.example.gaypass.SettingsActivity
 import com.google.android.material.switchmaterial.SwitchMaterial
 
-abstract class Theme(val primary: Int, val primaryDark: Int, val accent: Int, val bgText: Int, val bgDrawable: List<Int>?) {
+abstract class Theme(val primary: Int, val primaryDark: Int, val accent: Int, val bgText: Int, val bgDrawable: List<Int>?, val name: String) {
     private val SECONDARY_THRASHOLD = 53
 
     abstract fun apply()

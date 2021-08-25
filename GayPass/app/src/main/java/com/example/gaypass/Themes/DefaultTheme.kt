@@ -17,7 +17,8 @@ class DefaultTheme
         R.color.colorPrimaryDarkDefault,
         R.color.colorAccentDefault,
         R.color.colorBgDefault,
-        null
+        null,
+        context.getString(R.string.defaultTheme_text)
     ) {
         override fun apply() {
             super.applyTheme(

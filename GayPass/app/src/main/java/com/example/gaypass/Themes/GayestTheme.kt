@@ -21,7 +21,8 @@ class GayestTheme
             R.drawable.background_main_theme_verygay,
             R.drawable.background_info_theme_verygay,
             R.drawable.background_settings_theme_verygay
-        )
+        ),
+        context.getString(R.string.gayestTheme_text)
     ) {
         override fun apply() {
             super.applyTheme(

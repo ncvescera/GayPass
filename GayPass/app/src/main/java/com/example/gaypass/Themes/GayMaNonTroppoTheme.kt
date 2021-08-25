@@ -20,7 +20,8 @@ class GayMaNonTroppoTheme(
             R.drawable.background_main_theme_gaymanontroppo,
             R.drawable.background_info_theme_gaymanontroppo,
             R.drawable.background_settings_theme_gaymanontroppo
-        )
+        ),
+        "GayMaNonTroppo Theme"
     ) {
         override fun apply() {
             super.applyTheme(

@@ -21,7 +21,8 @@ class GayLatenteTheme
             R.drawable.background_main_theme_gaylatente,
             R.drawable.background_info_theme_gaylatente,
             R.drawable.background_settings_theme_gaylatente
-        )
+        ),
+        context.getString(R.string.gayLatenteTheme_text)
     ) {
         override fun apply() {
             super.applyTheme(

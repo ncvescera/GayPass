@@ -43,33 +43,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_themes">
 
-            <RadioButton
-                android:id="@+id/default_theme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="onRadioButtonClicked"
-                android:text="@string/defaultTheme_text" />
 
-            <RadioButton
-                android:id="@+id/rainbow_theme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="onRadioButtonClicked"
-                android:text="@string/rainbowTheme_text" />
-
-            <RadioButton
-                android:id="@+id/gayest_theme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="onRadioButtonClicked"
-                android:text="@string/gayestTheme_text" />
-
-            <RadioButton
-                android:id="@+id/gayLatente_theme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="onRadioButtonClicked"
-                android:text="@string/gayLatenteTheme_text" />
         </RadioGroup>
 
         <TextView

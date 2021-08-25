@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.RadioButton
+import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.example.gaypass.Managers.SettingsManager
 import com.example.gaypass.Managers.ThemeManager
 import com.google.android.material.switchmaterial.SwitchMaterial
+import kotlin.math.sign
 
 
 class SettingsActivity : AppCompatActivity() {
@@ -25,7 +27,36 @@ class SettingsActivity : AppCompatActivity() {
         // utils Managers
         settingManager = SettingsManager(this)
         themeManager = ThemeManager(this, window, supportActionBar, findViewById(R.id.settings_container))
-        
+
+        // --- generating radio buttons ---//
+        var radioButtons = arrayListOf<RadioButton>()                       // list for storing all the radio buttons
+        val radioGroup = findViewById<RadioGroup>(R.id.radioGroup_themes)   // radioGroup in the Activiry
+
+        for (i in themeManager.themes.indices) {
+            // create new Radio Button
+            var tmp = RadioButton(this)
+
+            // set text
+            tmp.text = themeManager.themes[i].name
+
+            // set checked if is the active theme
+            tmp.isChecked = (i == themeManager.theme)
+
+            // set click listener
+            tmp.setOnClickListener {
+                themeManager.theme = i
+            }
+
+            // set id
+            tmp.id = i + 100    // must set the id otherwise a radio button remains clicked
+
+            // add to the list
+            radioButtons.add(tmp)
+
+            // add to the RadioGroup
+            radioGroup.addView(tmp)
+        }
+
         // apply theme
         themeManager.applyTheme()
 
@@ -35,7 +66,6 @@ class SettingsActivity : AppCompatActivity() {
         emojyOnlyOnStart = findViewById(R.id.gui_emojyOnlyStart)
 
         // set switches with stored value
-        intiRadioButtons()
         neverPlaySounds.isChecked       = settingManager.soundNever
         soundsOnlyOnStart.isChecked     = settingManager.soundOnlyOnStart
         emojyOnlyOnStart.isChecked      = settingManager.emojyOnlyOnStart
@@ -69,62 +99,6 @@ class SettingsActivity : AppCompatActivity() {
 
             // set new Value
             settingManager.emojyOnlyOnStart = this_button.isChecked
-        }
-    }
-
-    // --- RADIO BUTTON SECTION --- //
-    // initialize radio buttons (themes) with the selected theme
-    private fun intiRadioButtons() {
-        when(settingManager.currentTheme) {
-            ThemeManager.DEFAULT -> {
-                findViewById<RadioButton>(R.id.default_theme).isChecked = true
-            }
-            ThemeManager.GAYEST_THEME -> {
-                findViewById<RadioButton>(R.id.gayest_theme).isChecked = true
-            }
-            ThemeManager.GAYLATENTE_THEME -> {
-                findViewById<RadioButton>(R.id.gayLatente_theme).isChecked = true
-            }
-            ThemeManager.RAINBOW_THEME -> {
-                findViewById<RadioButton>(R.id.rainbow_theme).isChecked = true
-            }
-        }
-    }
-
-    // function to handle the theme selection
-    // is setted on the radiobutton's field onClickListener in the activiry_setting.xml file
-    fun onRadioButtonClicked(view: View) {
-        if (view is RadioButton) {
-            // Is the button now checked?
-            val checked = view.isChecked
-
-            // Check which radio button was clicked
-            when (view.getId()) {
-                R.id.default_theme -> {
-                    // Apply DEFAULT Theme
-                    if (checked) {
-                        themeManager.theme = ThemeManager.DEFAULT
-                    }
-                }
-                R.id.gayest_theme -> {
-                    // Apply GAYEST Theme
-                    if (checked) {
-                        themeManager.theme = ThemeManager.GAYEST_THEME
-                    }
-                }
-                R.id.gayLatente_theme -> {
-                    // Apply GAYLATENTE Theme
-                    if (checked) {
-                        themeManager.theme = ThemeManager.GAYLATENTE_THEME
-                    }
-                }
-                R.id.rainbow_theme -> {
-                    // Apply GAYLATENTE Theme
-                    if (checked) {
-                        themeManager.theme = ThemeManager.RAINBOW_THEME
-                    }
-                }
-            }
         }
     }
 }
