@@ -6,10 +6,15 @@ import android.app.Activity
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.blue
 import androidx.core.graphics.green
@@ -51,11 +56,43 @@ abstract class Theme(val primary: Int, val primaryDark: Int, val accent: Int, va
             )
         )
 
-        // set switches colors
-        setSwitchesColors(context, box_maincontent, accent)
+        // set switches & buttons colors only in the Settings Activity
+        if ((context as Activity) is SettingsActivity) {
+            setRadioButtonsColors(context, box_maincontent, accent)
+            setSwitchesColors(context, box_maincontent, accent)
+        }
     }
 
-    protected open fun setSwitchesColors(context: Context, box_maincontent: View, primaryColor: Int) {
+        protected open fun setRadioButtonsColors(context: Context, box_maincontent: View, primaryColor: Int) {
+            val box_childs = box_maincontent as ViewGroup
+            for (i in 0 until box_childs.childCount) {
+                when (box_childs[i]) {
+                    is RadioGroup -> {
+                        val radioGroup = box_childs[i] as RadioGroup
+
+                        for (i in 0 until radioGroup.childCount) {
+                            val tmp = radioGroup[i] as RadioButton
+
+
+                            tmp.buttonTintList = ColorStateList(
+                                arrayOf(
+                                    intArrayOf(-R.attr.state_enabled),
+                                    intArrayOf(R.attr.state_checked),
+                                    intArrayOf()
+                                ),
+                                intArrayOf(
+                                    0,                                                //useless
+                                    ContextCompat.getColor(context, primaryColor),    // checked primary color
+                                    Color.GRAY                                       // unchecked primary color
+                                )
+                            )
+                        }
+                    }
+                }
+            }
+        }
+
+        protected open fun setSwitchesColors(context: Context, box_maincontent: View, primaryColor: Int) {
         // generate secondary color
         val tmp = ContextCompat.getColor(context, primaryColor)
         val newcolor = Color.rgb(tmp.red, tmp.green + SECONDARY_THRASHOLD, tmp.blue)

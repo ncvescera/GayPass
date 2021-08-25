@@ -1,11 +1,14 @@
 package com.example.gaypass
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.gaypass.Managers.SettingsManager
 import com.example.gaypass.Managers.ThemeManager
 import com.google.android.material.switchmaterial.SwitchMaterial
