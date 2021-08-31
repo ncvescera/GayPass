@@ -81,6 +81,8 @@ class MainActivity : AppCompatActivity() {
         waringTextView = findViewById(R.id.warningText)
 
         // onClickListeners
+        /*
+        // ill leave this for the new easteregg !
         imageView.setOnClickListener {
             if (counter < 10)
                 counter ++
@@ -89,6 +91,7 @@ class MainActivity : AppCompatActivity() {
                 //Toast.makeText(this, "GayestMode Active !", Toast.LENGTH_SHORT).show()
             }
         }
+        */
 
         // try to load the qr if previously stored
         isPassLoaded = loadPass()
@@ -102,13 +105,6 @@ class MainActivity : AppCompatActivity() {
             quoteTextView.visibility = View.INVISIBLE
 
         }
-
-        // check if always GayestMode
-        /*
-        if (settingManager.gayest_theme)
-            enableGayestMode()
-
-         */
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -121,14 +117,6 @@ class MainActivity : AppCompatActivity() {
         if (settingManager.emojyOnlyOnStart == false)
             setRandomTitle()
 
-        // check if GayestMode Always On
-        /*
-        if (settingManager.gayest_theme)
-            enableGayestMode()
-        else
-            disableGayestMode()
-        */
-
         // redraw the quote
         if (isPassLoaded) {
             printText()
@@ -137,8 +125,6 @@ class MainActivity : AppCompatActivity() {
             if (settingManager.soundOnlyOnStart == false)
                 playSound()
         }
-
-
     }
 
     private fun setRandomTitle() {
@@ -159,17 +145,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun enableGayestMode() {
-        // set new background and wrapping color
-        layout.setBackgroundResource(R.drawable.background_rainbow)
-        bg.setBackgroundColor(Color.parseColor("#E1FFFFFF"))
-    }
-
-    private fun disableGayestMode() {
-        layout.setBackgroundResource(R.drawable.background_main_theme_gaymanontroppo)
-        bg.setBackgroundColor(Color.parseColor("#00FFFFFF"))
-
-    }
 
     // ------------------ OPTION MENU SECTION ------------------ //
 
