@@ -79,6 +79,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sound_never" />
 
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/sound_loudaf"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/sound_loudaf_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sound_onlyonstart" />
+
         <TextView
             android:id="@+id/textView_gui"
             android:layout_width="0dp"
@@ -91,7 +100,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sound_onlyonstart" />
+            app:layout_constraintTop_toBottomOf="@+id/sound_loudaf" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/gui_emojyOnlyStart"

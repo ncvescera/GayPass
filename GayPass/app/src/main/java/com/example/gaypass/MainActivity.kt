@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
     // Constants
     private          val PICK_IMAGE = 100
     private lateinit var DATA_PATH: String
+    private          var MAX_VOL: Int = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +69,9 @@ class MainActivity : AppCompatActivity() {
         // utils Object init
         mediaPlayer = MediaPlayer.create(this, R.raw.imgay)
         audioManager =  getSystemService(android.content.Context.AUDIO_SERVICE) as AudioManager
+
+        // get the max level volume for Loud A.F. mode
+        MAX_VOL = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
 
         // GUI getting refs
         layout = findViewById(R.id.layout)
@@ -144,12 +148,15 @@ class MainActivity : AppCompatActivity() {
     private fun playSound() {
         // check volume level
         val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
-        if (currentVolume <= 5)
+        if (currentVolume <= 5 && !settingManager.loudAF)
             Toast.makeText(this, getString(R.string.lowaudio_warning), Toast.LENGTH_SHORT).show()
 
         // play sound
-        if (settingManager.soundNever == false)
+        if (settingManager.soundNever == false) {
+            if(settingManager.loudAF)
+                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, MAX_VOL, 0) // set max vol
             mediaPlayer.start()
+        }
     }
 
     private fun enableGayestMode() {

@@ -24,6 +24,7 @@ class SettingsManager(context: Context) {
     // sounds
     private val soundOnlyOnStart_prop = object { val id = "sound_onlystart"; val value = false }
     private val soundNever_prop = object { val id = "sound_never"; val value = false }
+    private val loudAF_prop = object {val id = "sound_loudaf"; val value = false }
 
     // gui
     private val emojyOnlyOnStart_prop = object { val id = "emojy_onlystart"; val value = false }
@@ -55,6 +56,15 @@ class SettingsManager(context: Context) {
         set(value) {
             with (sharedPref.edit()) {
                 putBoolean(soundNever_prop.id, value)
+                apply()
+            }
+        }
+
+    var loudAF: Boolean
+        get() = sharedPref.getBoolean(loudAF_prop.id, loudAF_prop.value)
+        set(value) {
+            with (sharedPref.edit()) {
+                putBoolean(loudAF_prop.id, value)
                 apply()
             }
         }

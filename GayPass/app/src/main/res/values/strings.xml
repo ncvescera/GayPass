@@ -36,6 +36,7 @@
 
     <string name="sound_never_text">Never Play Sounds</string>
     <string name="sound_onlystart_text">Play Sounds only on StartUp</string>
+    <string name="sound_loudaf_text">Enable Loud A.F. Mode</string>
 
     <string name="gui_emojyOnlyStartup">Random Emojy only on StartUp</string>
 

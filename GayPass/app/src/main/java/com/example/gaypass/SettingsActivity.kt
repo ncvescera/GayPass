@@ -18,6 +18,7 @@ import kotlin.math.sign
 class SettingsActivity : AppCompatActivity() {
     private lateinit var neverPlaySounds: SwitchMaterial
     private lateinit var soundsOnlyOnStart: SwitchMaterial
+    private lateinit var loudAF: SwitchMaterial
     private lateinit var emojyOnlyOnStart: SwitchMaterial
 
     private lateinit  var settingManager: SettingsManager
@@ -66,11 +67,13 @@ class SettingsActivity : AppCompatActivity() {
         // GUI get refs
         neverPlaySounds = findViewById(R.id.sound_never)
         soundsOnlyOnStart = findViewById(R.id.sound_onlyonstart)
+        loudAF = findViewById(R.id.sound_loudaf)
         emojyOnlyOnStart = findViewById(R.id.gui_emojyOnlyStart)
 
         // set switches with stored value
         neverPlaySounds.isChecked       = settingManager.soundNever
         soundsOnlyOnStart.isChecked     = settingManager.soundOnlyOnStart
+        loudAF.isChecked                = settingManager.loudAF
         emojyOnlyOnStart.isChecked      = settingManager.emojyOnlyOnStart
 
         // onClickListeners
@@ -83,6 +86,9 @@ class SettingsActivity : AppCompatActivity() {
 
             soundsOnlyOnStart.isChecked = false
             settingManager.soundOnlyOnStart = false
+
+            loudAF.isChecked = false
+            settingManager.loudAF = false
         }
 
         // --- Sounds Only on StartUp --- //
@@ -91,6 +97,17 @@ class SettingsActivity : AppCompatActivity() {
 
             // set new Value
             settingManager.soundOnlyOnStart = this_button.isChecked
+
+            neverPlaySounds.isChecked = false
+            settingManager.soundNever = false
+        }
+
+        // --- Loud AF Mode --- //
+        loudAF.setOnClickListener {
+            val this_button = it as SwitchMaterial
+
+            // set new Value
+            settingManager.loudAF = this_button.isChecked
 
             neverPlaySounds.isChecked = false
             settingManager.soundNever = false
