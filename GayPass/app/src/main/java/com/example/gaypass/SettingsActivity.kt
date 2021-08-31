@@ -21,6 +21,7 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var loudAF: SwitchMaterial
     private lateinit var emojyOnlyOnStart: SwitchMaterial
     private lateinit var quotesOnlyOnStart: SwitchMaterial
+    private lateinit var quotesOnClick: SwitchMaterial
     private lateinit var noQuotes: SwitchMaterial
 
 
@@ -73,6 +74,7 @@ class SettingsActivity : AppCompatActivity() {
         loudAF = findViewById(R.id.sound_loudaf)
         emojyOnlyOnStart = findViewById(R.id.gui_emojyOnlyStart)
         quotesOnlyOnStart = findViewById(R.id.gui_quotesOnlyStart)
+        quotesOnClick = findViewById(R.id.gui_quotesOnClick)
         noQuotes = findViewById(R.id.gui_noQuotes)
 
         // set switches with stored value
@@ -81,6 +83,7 @@ class SettingsActivity : AppCompatActivity() {
         loudAF.isChecked                = settingManager.loudAF
         emojyOnlyOnStart.isChecked      = settingManager.emojyOnlyOnStart
         quotesOnlyOnStart.isChecked     = settingManager.quotesOnlyOnStart
+        quotesOnClick.isChecked         = settingManager.quotesOnClick
         noQuotes.isChecked              = settingManager.noQuotes
 
         // onClickListeners
@@ -138,6 +141,16 @@ class SettingsActivity : AppCompatActivity() {
             settingManager.noQuotes = false
         }
 
+        quotesOnClick.setOnClickListener {
+            val this_button = it as SwitchMaterial
+
+            // set new Value
+            settingManager.quotesOnClick = this_button.isChecked
+
+            noQuotes.isChecked = false
+            settingManager.noQuotes = false
+        }
+
         noQuotes.setOnClickListener {
             val this_button = it as SwitchMaterial
 
@@ -145,7 +158,9 @@ class SettingsActivity : AppCompatActivity() {
             settingManager.noQuotes = this_button.isChecked
 
             quotesOnlyOnStart.isChecked = false
+            quotesOnClick.isChecked = false
             settingManager.quotesOnlyOnStart = false
+            settingManager.quotesOnClick = false
         }
     }
 }

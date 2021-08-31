@@ -81,6 +81,11 @@ class MainActivity : AppCompatActivity() {
         waringTextView = findViewById(R.id.warningText)
 
         // onClickListeners
+        quoteTextView.setOnClickListener {
+            if (settingManager.quotesOnClick)
+                printText()
+        }
+
         /*
         // ill leave this for the new easteregg !
         imageView.setOnClickListener {
@@ -119,7 +124,7 @@ class MainActivity : AppCompatActivity() {
 
         // redraw the quote
         if (isPassLoaded) {
-            if (!settingManager.quotesOnlyOnStart)
+            if (!settingManager.quotesOnlyOnStart || quoteTextView.text == "")
                 printText()
 
             // Sounds Only on StrtUp

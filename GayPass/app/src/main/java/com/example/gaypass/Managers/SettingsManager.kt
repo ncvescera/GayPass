@@ -30,6 +30,7 @@ class SettingsManager(context: Context) {
     private val emojyOnlyOnStart_prop   = SettingProp("emojy_onlystart",false)
     private val quotesOnlyOnStart_prop  = SettingProp("quotes_OnlyStart", false)
     private val noQuotes_prop           = SettingProp("noquotes", false)
+    private val quotesOnClick_prob      = SettingProp("quotesOnClick", false)
 
     // --- PUBLIC ATTRS SECTION ---//
     // public getters & setters
@@ -96,6 +97,15 @@ class SettingsManager(context: Context) {
         set(value) {
             with (sharedPref.edit()) {
                 putBoolean(noQuotes_prop.id, value)
+                apply()
+            }
+        }
+
+    var quotesOnClick: Boolean
+        get() = sharedPref.getBoolean(quotesOnClick_prob.id, quotesOnClick_prob.default_value as Boolean)
+        set(value) {
+            with (sharedPref.edit()) {
+                putBoolean(quotesOnClick_prob.id, value)
                 apply()
             }
         }

@@ -40,6 +40,7 @@
 
     <string name="gui_emojyOnlyStartup_text">Random Emojy only on StartUp</string>
     <string name="gui_quotesOnlyStart_text">Random Quotes only on StartUp</string>
+    <string name="gui_quotesOnClick_text">Change Quotes on Click</string>
     <string name="gui_noQuotes_text">No Quotes</string>
 
     <!-- Info Values -->
