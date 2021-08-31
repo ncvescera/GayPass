@@ -28,6 +28,10 @@
     <string name="menu_setting_text">Settings</string>
     <string name="menu_info_text">Info</string>
 
+    <!-- Dialogs -->
+    <string name="dialogTitle_deleteqr">Deleting QR</string>
+    <string name="dialogMessage_deleteqr">You are going to delete your QR, are you sure to continue?</string>
+
     <!-- Settings Names -->
     <string name="defaultTheme_text">Default Theme</string>
     <string name="rainbowTheme_text">Rainbow Theme</string>

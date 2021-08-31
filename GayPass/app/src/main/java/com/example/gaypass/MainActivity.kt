@@ -1,5 +1,7 @@
 package com.example.gaypass
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.media.AudioManager
@@ -171,29 +173,44 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.menu_delete -> {
-                // delete the QR from the Private Storage
-                val file = File(DATA_PATH)
-                val deleted: Boolean = file.delete()
+                printDialog(
+                    R.string.dialogTitle_deleteqr,
+                    R.string.dialogMessage_deleteqr,
+                    {
+                        // delete the QR from the Private Storage
+                        val file = File(DATA_PATH)
+                        val deleted: Boolean = file.delete()
 
-                if (deleted)
-                    Toast.makeText(this, getString(R.string.qrdelete_success), Toast.LENGTH_LONG).show()
-                else
-                    Toast.makeText(this, getString(R.string.qrdelete_error), Toast.LENGTH_LONG).show()
+                        if (deleted)
+                            Toast.makeText(
+                                this,
+                                getString(R.string.qrdelete_success),
+                                Toast.LENGTH_LONG
+                            ).show()
+                        else
+                            Toast.makeText(
+                                this,
+                                getString(R.string.qrdelete_error),
+                                Toast.LENGTH_LONG
+                            ).show()
 
-                // clear the ImageView
-                imageView.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this, // Context
-                        R.drawable.ic_baseline_image_search_24 // Drawable
-                    )
+                        // clear the ImageView
+                        imageView.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                this, // Context
+                                R.drawable.ic_baseline_image_search_24 // Drawable
+                            )
+                        )
+
+                        // update the TextViews visibilities
+                        quoteTextView.visibility = View.INVISIBLE
+                        waringTextView.visibility = View.VISIBLE
+
+                        // says that the qr is not loaded
+                        isPassLoaded = false
+                    },
+                    {}
                 )
-
-                // update the TextViews visibilities
-                quoteTextView.visibility = View.INVISIBLE
-                waringTextView.visibility = View.VISIBLE
-
-                // says that the qr is not loaded
-                isPassLoaded = false
 
                 true
             }
@@ -213,6 +230,28 @@ class MainActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    // print Dialog with given Title, Message, Success Function and Fail Function
+    private fun printDialog(title: Int, message: Int, success_function: () -> Unit, fail_function: () -> Unit) {
+        this.let {
+            val builder = AlertDialog.Builder(it)
+            builder.apply {
+                setPositiveButton("OK",
+                    DialogInterface.OnClickListener { dialog, id ->
+                        success_function()
+                    })
+                setNegativeButton("Cancel",
+                    DialogInterface.OnClickListener { dialog, id ->
+                        fail_function()
+                    })
+                setTitle(title)
+                setMessage(message)
+            }
+
+            // Create the AlertDialog
+            builder.create()
+        }.show()
     }
 
     // ------------------ ACTIVITY RESULT SECTION ------------------ //
