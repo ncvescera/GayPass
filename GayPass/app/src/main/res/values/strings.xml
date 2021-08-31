@@ -38,7 +38,8 @@
     <string name="sound_onlystart_text">Play Sounds only on StartUp</string>
     <string name="sound_loudaf_text">Enable Loud A.F. Mode</string>
 
-    <string name="gui_emojyOnlyStartup">Random Emojy only on StartUp</string>
+    <string name="gui_emojyOnlyStartup_text">Random Emojy only on StartUp</string>
+    <string name="gui_noQuotes_text">No Quotes</string>
 
     <!-- Info Values -->
     <string name="info">This is GayPass App. It lets you to manage and store your GreenPass QR-Code easly</string>

@@ -241,7 +241,7 @@ class MainActivity : AppCompatActivity() {
     // update the Quotes TextView with a random quote
     private fun printText() {
         // update the TextView with a random quote
-        quoteTextView.text = randomGenerator.getRandomQuote()
+        quoteTextView.text = if (settingManager.noQuotes) "" else randomGenerator.getRandomQuote()
 
         // update the TextViews' visibility
         waringTextView.visibility = View.INVISIBLE

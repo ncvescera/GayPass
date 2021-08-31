@@ -28,7 +28,7 @@ class SettingsManager(context: Context) {
 
     // gui
     private val emojyOnlyOnStart_prop = object { val id = "emojy_onlystart"; val value = false }
-
+    private val noQuotes_prop = object {val id = "noquotes"; val value = false }
 
     // --- PUBLIC ATTRS SECTION ---//
     // public getters & setters
@@ -78,4 +78,12 @@ class SettingsManager(context: Context) {
             }
         }
 
+    var noQuotes: Boolean
+        get() = sharedPref.getBoolean(noQuotes_prop.id, noQuotes_prop.value)
+        set(value) {
+            with (sharedPref.edit()) {
+                putBoolean(noQuotes_prop.id, value)
+                apply()
+            }
+        }
 }

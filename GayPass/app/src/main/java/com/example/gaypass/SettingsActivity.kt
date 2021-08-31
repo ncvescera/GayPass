@@ -20,6 +20,8 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var soundsOnlyOnStart: SwitchMaterial
     private lateinit var loudAF: SwitchMaterial
     private lateinit var emojyOnlyOnStart: SwitchMaterial
+    private lateinit var noQuotes: SwitchMaterial
+
 
     private lateinit  var settingManager: SettingsManager
     private lateinit  var themeManager: ThemeManager
@@ -69,12 +71,14 @@ class SettingsActivity : AppCompatActivity() {
         soundsOnlyOnStart = findViewById(R.id.sound_onlyonstart)
         loudAF = findViewById(R.id.sound_loudaf)
         emojyOnlyOnStart = findViewById(R.id.gui_emojyOnlyStart)
+        noQuotes = findViewById(R.id.gui_noQuotes)
 
         // set switches with stored value
         neverPlaySounds.isChecked       = settingManager.soundNever
         soundsOnlyOnStart.isChecked     = settingManager.soundOnlyOnStart
         loudAF.isChecked                = settingManager.loudAF
         emojyOnlyOnStart.isChecked      = settingManager.emojyOnlyOnStart
+        noQuotes.isChecked              = settingManager.noQuotes
 
         // onClickListeners
         // --- Never Play Sounds --- //
@@ -119,6 +123,13 @@ class SettingsActivity : AppCompatActivity() {
 
             // set new Value
             settingManager.emojyOnlyOnStart = this_button.isChecked
+        }
+
+        noQuotes.setOnClickListener {
+            val this_button = it as SwitchMaterial
+
+            // set new Value
+            settingManager.noQuotes = this_button.isChecked
         }
     }
 }
