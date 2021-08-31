@@ -19,22 +19,23 @@ class SettingsManager(context: Context) {
     // Proprieties for identifying the value on the SharedProprieties
 
     // themes
-    private val currentTheme_prop = object { val id = "current_theme"; val value = 0 }
+    private val currentTheme_prop       = SettingProp("current_theme", 0)
 
     // sounds
-    private val soundOnlyOnStart_prop = object { val id = "sound_onlystart"; val value = false }
-    private val soundNever_prop = object { val id = "sound_never"; val value = false }
-    private val loudAF_prop = object {val id = "sound_loudaf"; val value = false }
+    private val soundOnlyOnStart_prop   = SettingProp("sound_onlystart", false)
+    private val soundNever_prop         = SettingProp("sound_never", false)
+    private val loudAF_prop             = SettingProp("sound_loudaf", false)
 
     // gui
-    private val emojyOnlyOnStart_prop = object { val id = "emojy_onlystart"; val value = false }
-    private val noQuotes_prop = object {val id = "noquotes"; val value = false }
+    private val emojyOnlyOnStart_prop   = SettingProp("emojy_onlystart",false)
+    private val noQuotes_prop           = SettingProp("noquotes", false)
 
     // --- PUBLIC ATTRS SECTION ---//
     // public getters & setters
 
+    /* ** THEME ** */
     var currentTheme: Int
-        get() = sharedPref.getInt(currentTheme_prop.id, currentTheme_prop.value)
+        get() = sharedPref.getInt(currentTheme_prop.id, currentTheme_prop.default_value as Int)
         set(value) {
             with (sharedPref.edit()) {
                 putInt(currentTheme_prop.id, value)
@@ -42,8 +43,9 @@ class SettingsManager(context: Context) {
             }
         }
 
+    /* ** SOUNDS  ** */
     var soundOnlyOnStart: Boolean
-        get() = sharedPref.getBoolean(soundOnlyOnStart_prop.id, soundOnlyOnStart_prop.value)
+        get() = sharedPref.getBoolean(soundOnlyOnStart_prop.id, soundOnlyOnStart_prop.default_value as Boolean)
         set(value) {
             with (sharedPref.edit()) {
                 putBoolean(soundOnlyOnStart_prop.id, value)
@@ -52,7 +54,7 @@ class SettingsManager(context: Context) {
         }
 
     var soundNever: Boolean
-        get() = sharedPref.getBoolean(soundNever_prop.id, soundNever_prop.value)
+        get() = sharedPref.getBoolean(soundNever_prop.id, soundNever_prop.default_value as Boolean)
         set(value) {
             with (sharedPref.edit()) {
                 putBoolean(soundNever_prop.id, value)
@@ -61,7 +63,7 @@ class SettingsManager(context: Context) {
         }
 
     var loudAF: Boolean
-        get() = sharedPref.getBoolean(loudAF_prop.id, loudAF_prop.value)
+        get() = sharedPref.getBoolean(loudAF_prop.id, loudAF_prop.default_value as Boolean)
         set(value) {
             with (sharedPref.edit()) {
                 putBoolean(loudAF_prop.id, value)
@@ -69,8 +71,9 @@ class SettingsManager(context: Context) {
             }
         }
 
+    /* ** GUI ** */
     var emojyOnlyOnStart: Boolean
-        get() = sharedPref.getBoolean(emojyOnlyOnStart_prop.id, emojyOnlyOnStart_prop.value)
+        get() = sharedPref.getBoolean(emojyOnlyOnStart_prop.id, emojyOnlyOnStart_prop.default_value as Boolean)
         set(value) {
             with (sharedPref.edit()) {
                 putBoolean(emojyOnlyOnStart_prop.id, value)
@@ -79,7 +82,7 @@ class SettingsManager(context: Context) {
         }
 
     var noQuotes: Boolean
-        get() = sharedPref.getBoolean(noQuotes_prop.id, noQuotes_prop.value)
+        get() = sharedPref.getBoolean(noQuotes_prop.id, noQuotes_prop.default_value as Boolean)
         set(value) {
             with (sharedPref.edit()) {
                 putBoolean(noQuotes_prop.id, value)
