@@ -28,6 +28,7 @@ class SettingsManager(context: Context) {
 
     // gui
     private val emojyOnlyOnStart_prop   = SettingProp("emojy_onlystart",false)
+    private val quotesOnlyOnStart_prop  = SettingProp("quotes_OnlyStart", false)
     private val noQuotes_prop           = SettingProp("noquotes", false)
 
     // --- PUBLIC ATTRS SECTION ---//
@@ -77,6 +78,15 @@ class SettingsManager(context: Context) {
         set(value) {
             with (sharedPref.edit()) {
                 putBoolean(emojyOnlyOnStart_prop.id, value)
+                apply()
+            }
+        }
+
+    var quotesOnlyOnStart: Boolean
+        get() = sharedPref.getBoolean(quotesOnlyOnStart_prop.id, quotesOnlyOnStart_prop.default_value as Boolean)
+        set(value) {
+            with(sharedPref.edit()) {
+                putBoolean(quotesOnlyOnStart_prop.id, value)
                 apply()
             }
         }

@@ -119,7 +119,8 @@ class MainActivity : AppCompatActivity() {
 
         // redraw the quote
         if (isPassLoaded) {
-            printText()
+            if (!settingManager.quotesOnlyOnStart)
+                printText()
 
             // Sounds Only on StrtUp
             if (settingManager.soundOnlyOnStart == false)

@@ -113,13 +113,22 @@
             app:layout_constraintTop_toBottomOf="@+id/textView_gui" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/gui_quotesOnlyStart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/gui_quotesOnlyStart_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gui_emojyOnlyStart" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/gui_noQuotes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/gui_noQuotes_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gui_emojyOnlyStart" />
+            app:layout_constraintTop_toBottomOf="@+id/gui_quotesOnlyStart" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
