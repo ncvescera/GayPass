@@ -75,8 +75,8 @@ abstract class Theme(
                     is RadioGroup -> {
                         val radioGroup = box_childs[i] as RadioGroup
 
-                        for (i in 0 until radioGroup.childCount) {
-                            val tmp = radioGroup[i] as RadioButton
+                        for (j in 0 until radioGroup.childCount) {
+                            val tmp = radioGroup[j] as RadioButton
 
                             // set button colors
                             tmp.buttonTintList = ColorStateList(
