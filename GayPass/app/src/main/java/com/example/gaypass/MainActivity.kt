@@ -150,6 +150,39 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // update the Quotes TextView with a random quote
+    private fun printText() {
+        // update the TextView with a random quote
+        quoteTextView.text = if (settingManager.noQuotes) "" else randomGenerator.getRandomQuote()
+
+        // update the TextViews' visibility
+        waringTextView.visibility = View.INVISIBLE
+        quoteTextView.visibility  = View.VISIBLE
+
+    }
+
+    // print Dialog with given Title, Message, Success Function and Fail Function
+    private fun printDialog(title: Int, message: Int, success_function: () -> Unit, fail_function: () -> Unit) {
+        this.let {
+            val builder = AlertDialog.Builder(it)
+            builder.apply {
+                setPositiveButton("OK",
+                    DialogInterface.OnClickListener { dialog, id ->
+                        success_function()
+                    })
+                setNegativeButton("Cancel",
+                    DialogInterface.OnClickListener { dialog, id ->
+                        fail_function()
+                    })
+                setTitle(title)
+                setMessage(message)
+            }
+
+            // Create the AlertDialog
+            builder.create()
+        }.show()
+    }
+
 
     // ------------------ OPTION MENU SECTION ------------------ //
 
@@ -230,27 +263,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // print Dialog with given Title, Message, Success Function and Fail Function
-    private fun printDialog(title: Int, message: Int, success_function: () -> Unit, fail_function: () -> Unit) {
-        this.let {
-            val builder = AlertDialog.Builder(it)
-            builder.apply {
-                setPositiveButton("OK",
-                    DialogInterface.OnClickListener { dialog, id ->
-                        success_function()
-                    })
-                setNegativeButton("Cancel",
-                    DialogInterface.OnClickListener { dialog, id ->
-                        fail_function()
-                    })
-                setTitle(title)
-                setMessage(message)
-            }
-
-            // Create the AlertDialog
-            builder.create()
-        }.show()
-    }
 
     // ------------------ ACTIVITY RESULT SECTION ------------------ //
 
@@ -280,17 +292,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     // ------------------ QR MANAGEMENT SECTION ------------------ //
-
-    // update the Quotes TextView with a random quote
-    private fun printText() {
-        // update the TextView with a random quote
-        quoteTextView.text = if (settingManager.noQuotes) "" else randomGenerator.getRandomQuote()
-
-        // update the TextViews' visibility
-        waringTextView.visibility = View.INVISIBLE
-        quoteTextView.visibility  = View.VISIBLE
-
-    }
 
     // try to load the pass from the Private Storage (if exists)
     // Return True if correctly loaded, else False
