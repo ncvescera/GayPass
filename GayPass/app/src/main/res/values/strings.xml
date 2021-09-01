@@ -48,6 +48,11 @@
     <string name="gui_noQuotes_text">No Quotes</string>
 
     <!-- Info Values -->
-    <string name="info">This is GayPass App. It lets you to manage and store your GreenPass QR-Code easly</string>
+    <string name="info">
+        GayPass is an Android App that let you to store your Greeen Pass QR-Code in a cool and easy way.
+        You can store your QR-Code, delete it and update it !
+        Under the QR there is a Dumb Quote chosen random from a large database.\n\nMade By:\n\t<a href="https://github.com/ncvescera">@ncvescera</a>\n\t<a href="https://github.com/CiroSimonetti">@crsimonetti</a>\n\n
+        GitHub Repo: <a href="https://github.com/ncvescera/GayPass">GayPass</a>
+    </string>
     <string name="version">Version: v2.0 - Big Slut</string>
 </resources>
