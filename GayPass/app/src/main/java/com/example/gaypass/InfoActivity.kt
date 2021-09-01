@@ -3,7 +3,7 @@ package com.example.gaypass
 import android.os.Bundle
 
 import androidx.appcompat.app.AppCompatActivity
-import com.example.gaypass.Managers.ThemeManager
+import com.example.gaypass.managers.ThemeManager
 
 class InfoActivity : AppCompatActivity() {
 

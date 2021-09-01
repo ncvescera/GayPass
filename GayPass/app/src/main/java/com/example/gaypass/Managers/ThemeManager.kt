@@ -1,10 +1,10 @@
-package com.example.gaypass.Managers
+package com.example.gaypass.managers
 
 import android.content.Context
 import android.view.View
 import android.view.Window
 import androidx.appcompat.app.ActionBar
-import com.example.gaypass.Themes.*
+import com.example.gaypass.themes.*
 
 
 class ThemeManager(

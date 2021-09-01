@@ -1,18 +1,16 @@
-package com.example.gaypass.Managers
+package com.example.gaypass.managers
 
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.gaypass.R
 
 class SettingsManager(context: Context) {
     private var activity = context as Activity
     private var sharedPref: SharedPreferences
 
-
     init {
+        // init sharedPref object
         sharedPref = activity.getSharedPreferences("settings", Context.MODE_PRIVATE)
-
     }
 
     // --- PROP SECTION --- //

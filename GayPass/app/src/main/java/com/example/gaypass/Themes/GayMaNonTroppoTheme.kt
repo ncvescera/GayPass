@@ -1,4 +1,4 @@
-package com.example.gaypass.Themes
+package com.example.gaypass.themes
 
 import android.content.Context
 import android.view.View
@@ -25,10 +25,10 @@ class GayMaNonTroppoTheme(
     ) {
         override fun apply() {
             super.applyTheme(
-                context = context,
-                window = window,
-                view = view,
-                actionBar = actionBar
+                context     = context,
+                window      = window,
+                view        = view,
+                actionBar   = actionBar
             )
         }
     }

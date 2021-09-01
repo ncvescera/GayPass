@@ -1,12 +1,12 @@
-package com.example.gaypass.Utils
+package com.example.gaypass.utils
 
 class RandomGenerator {
-    // TODO: add new Quotes
+
     private val QUOTES = arrayListOf<String>(
         "I'M GAAAY !!",
         "BOOMER REMOVER",
-        "I have a crippling depression",
-        "Mongoloid Son",
+        "I HAVE A CRIPPLING DEPRESSION",
+        "MONGOLOID SON",
         "I'M AUTISTIC BOY",
         "NO HOMO",
         "UR GAY",
@@ -30,7 +30,6 @@ class RandomGenerator {
         "USE ME!"
     )
 
-    // TODO: add more Emojys
     private val EMOJYS = arrayListOf<String>(
         "\uD83E\uDD84",                                             // unicorn
         "\uD83C\uDF38",                                             // pink flower
@@ -69,13 +68,13 @@ class RandomGenerator {
     )
 
     fun getRandomQuote(): String {
-        var rand_index = (0 until QUOTES.size).random()
+        val rand_index = (0 until QUOTES.size).random()
 
         return QUOTES[rand_index]
     }
 
     fun getRandomEmojy(): String {
-        var rand_index = (0 until EMOJYS.size).random()
+        val rand_index = (0 until EMOJYS.size).random()
 
         return EMOJYS[rand_index]
     }

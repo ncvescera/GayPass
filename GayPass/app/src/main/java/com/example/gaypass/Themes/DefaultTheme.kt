@@ -1,4 +1,4 @@
-package com.example.gaypass.Themes
+package com.example.gaypass.themes
 
 import androidx.appcompat.app.ActionBar
 import android.content.Context
@@ -22,13 +22,14 @@ class DefaultTheme
     ) {
         override fun apply() {
             super.applyTheme(
-                context = context,
-                window = window,
-                view = view,
-                actionBar = actionBar
+                context     = context,
+                window      = window,
+                view        = view,
+                actionBar   = actionBar
             )
         }
 
+        // override function to avoid useless operation: just set null the bg
         override fun applyCustomBgDrawable(context: Context, view: View, bgs: List<Int>?) {
             view.background = null
         }

@@ -3,11 +3,9 @@ package com.example.gaypass
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.Color
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.Menu
@@ -17,13 +15,12 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import com.example.gaypass.Managers.SettingsManager
-import com.example.gaypass.Managers.ThemeManager
-import com.example.gaypass.Utils.RandomGenerator
+import com.example.gaypass.managers.SettingsManager
+import com.example.gaypass.managers.ThemeManager
+import com.example.gaypass.utils.RandomGenerator
 import java.io.File
 import java.io.FileOutputStream
 
@@ -43,44 +40,40 @@ class MainActivity : AppCompatActivity() {
 
     // utils Objects
     private           val randomGenerator = RandomGenerator()
-    private lateinit  var audioManager: AudioManager
-    private lateinit  var mediaPlayer: MediaPlayer
-    private lateinit  var settingManager: SettingsManager
-    private lateinit var themeManager: ThemeManager
+    private lateinit  var audioManager:     AudioManager
+    private lateinit  var mediaPlayer:      MediaPlayer
+    private lateinit  var settingManager:   SettingsManager
+    private lateinit  var themeManager:     ThemeManager
 
     // Constants
     private          val PICK_IMAGE = 100
+    private          var MAX_VOL    = 100
     private lateinit var DATA_PATH: String
-    private          var MAX_VOL: Int = 100
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // change the Activity's title
-        setRandomTitle()
-
-        DATA_PATH = "${filesDir.absoluteFile}/gaypass.png"
+        // GUI getting refs
+        layout          = findViewById(R.id.layout)
+        imageView       = findViewById(R.id.imageView)
+        bg              = findViewById(R.id.bg)
+        quoteTextView   = findViewById(R.id.quoteText)
+        waringTextView  = findViewById(R.id.warningText)
 
         // init settingManager & setting the theme
-        settingManager = SettingsManager(this)
-        themeManager = ThemeManager(this, window, supportActionBar, findViewById(R.id.layout))
-
-        themeManager.applyTheme()
+        settingManager  = SettingsManager(this)
+        themeManager    = ThemeManager(this, window, supportActionBar, layout)
 
         // utils Object init
-        mediaPlayer = MediaPlayer.create(this, R.raw.imgay)
-        audioManager =  getSystemService(android.content.Context.AUDIO_SERVICE) as AudioManager
+        mediaPlayer     = MediaPlayer.create(this, R.raw.imgay)
+        audioManager    =  getSystemService(android.content.Context.AUDIO_SERVICE) as AudioManager
 
-        // get the max level volume for Loud A.F. mode
-        MAX_VOL = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+        // set path and volume values
+        MAX_VOL = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)    // get the max level volume for Loud A.F. mode
+        DATA_PATH = "${filesDir.absoluteFile}/gaypass.png"                      // get QR path
 
-        // GUI getting refs
-        layout = findViewById(R.id.layout)
-        imageView = findViewById(R.id.imageView)
-        bg = findViewById(R.id.bg)
-        quoteTextView = findViewById(R.id.quoteText)
-        waringTextView = findViewById(R.id.warningText)
 
         // onClickListeners
         quoteTextView.setOnClickListener {
@@ -100,6 +93,10 @@ class MainActivity : AppCompatActivity() {
         }
         */
 
+        // apply current settings
+        setRandomTitle()            // change the Activity's title
+        themeManager.applyTheme()   // apply current theme
+
         // try to load the qr if previously stored
         isPassLoaded = loadPass()
         if(isPassLoaded) {
@@ -114,14 +111,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onResume() {
         super.onResume()
 
         themeManager.applyTheme()
 
         // update Emojy title
-        if (settingManager.emojyOnlyOnStart == false)
+        if (!settingManager.emojyOnlyOnStart)
             setRandomTitle()
 
         // redraw the quote
@@ -130,7 +126,7 @@ class MainActivity : AppCompatActivity() {
                 printText()
 
             // Sounds Only on StrtUp
-            if (settingManager.soundOnlyOnStart == false)
+            if (!settingManager.soundOnlyOnStart)
                 playSound()
         }
     }
@@ -146,9 +142,10 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, getString(R.string.lowaudio_warning), Toast.LENGTH_SHORT).show()
 
         // play sound
-        if (settingManager.soundNever == false) {
+        if (!settingManager.soundNever) {
             if(settingManager.loudAF)
                 audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, MAX_VOL, 0) // set max vol
+
             mediaPlayer.start()
         }
     }
@@ -159,6 +156,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.option_menu, menu)
+
         return true
     }
 
@@ -256,7 +254,7 @@ class MainActivity : AppCompatActivity() {
 
     // ------------------ ACTIVITY RESULT SECTION ------------------ //
 
-    // handles the return values of the other Activityes
+    // handles the return values of the other Activities
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -290,14 +288,14 @@ class MainActivity : AppCompatActivity() {
 
         // update the TextViews' visibility
         waringTextView.visibility = View.INVISIBLE
-        quoteTextView.visibility = View.VISIBLE
+        quoteTextView.visibility  = View.VISIBLE
 
     }
 
     // try to load the pass from the Private Storage (if exists)
     // Return True if correctly loaded, else False
     private fun loadPass(): Boolean {
-        // chech if the file exists
+        // check if the file exists
         val file = File(DATA_PATH)
         if (file.exists()) {
             // load the image and update the quotes TextView text
