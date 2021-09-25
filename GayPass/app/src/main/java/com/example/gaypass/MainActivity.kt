@@ -8,6 +8,7 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -21,8 +22,17 @@ import androidx.core.content.ContextCompat
 import com.example.gaypass.managers.SettingsManager
 import com.example.gaypass.managers.ThemeManager
 import com.example.gaypass.utils.RandomGenerator
+import com.google.mlkit.vision.barcode.Barcode
+import com.google.mlkit.vision.barcode.BarcodeScannerOptions
+import com.google.mlkit.vision.barcode.BarcodeScanning
+import com.google.mlkit.vision.common.InputImage
 import java.io.File
 import java.io.FileOutputStream
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import com.example.gaypass.Utils.DialogMaker
+import java.io.InputStream
+import java.nio.ByteBuffer
 
 
 class MainActivity : AppCompatActivity() {
@@ -138,7 +148,7 @@ class MainActivity : AppCompatActivity() {
     private fun playSound() {
         // check volume level
         val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
-        if (currentVolume <= 5 && !settingManager.loudAF)
+        if (currentVolume <= 5 && !settingManager.loudAF && !settingManager.soundNever)
             Toast.makeText(this, getString(R.string.lowaudio_warning), Toast.LENGTH_SHORT).show()
 
         // play sound
@@ -161,29 +171,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    // print Dialog with given Title, Message, Success Function and Fail Function
-    private fun printDialog(title: Int, message: Int, success_function: () -> Unit, fail_function: () -> Unit) {
-        this.let {
-            val builder = AlertDialog.Builder(it)
-            builder.apply {
-                setPositiveButton("OK",
-                    DialogInterface.OnClickListener { dialog, id ->
-                        success_function()
-                    })
-                setNegativeButton("Cancel",
-                    DialogInterface.OnClickListener { dialog, id ->
-                        fail_function()
-                    })
-                setTitle(title)
-                setMessage(message)
-            }
-
-            // Create the AlertDialog
-            builder.create()
-        }.show()
-    }
-
-
+    
     // ------------------ OPTION MENU SECTION ------------------ //
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -204,7 +192,8 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.menu_delete -> {
-                printDialog(
+                DialogMaker.printDialog(
+                    this,
                     R.string.dialogTitle_deleteqr,
                     R.string.dialogMessage_deleteqr,
                     {
@@ -274,6 +263,33 @@ class MainActivity : AppCompatActivity() {
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             if (data != null) {
                 imageUri = data.data!!
+
+                // init the barcode scanner
+                val options = BarcodeScannerOptions.Builder()
+                    .setBarcodeFormats(
+                        Barcode.FORMAT_QR_CODE
+                    )
+                    .build()
+
+                // loading image from path and getting BarcodeScanner instance
+                val image = InputImage.fromFilePath(this, imageUri)
+                val scanner = BarcodeScanning.getClient(options)
+
+                // qrdetection on given image
+                val result = scanner.process(image)
+                    // Task completed successfully
+                    .addOnSuccessListener { barcodes ->
+                        // showing a waring error if no qr is detected
+                        if (barcodes.size <= 0)
+                            DialogMaker.printDialog(this, "QR Warning", "It seems this image does not contain any QRCodes ...", {}, {})
+                    }
+
+                    // Task failed with an exception
+                    .addOnFailureListener {
+                        Log.d("BARCODE", "ERROR !")
+                    }
+
+                // update ImageView image
                 imageView.setImageURI(imageUri)
 
                 // set the Quotes TextView with a random quote
@@ -285,7 +301,9 @@ class MainActivity : AppCompatActivity() {
                 // says that the qr is loaded
                 isPassLoaded = true
 
+                // showing success Toast
                 Toast.makeText(this, getString(R.string.qrupload_success), Toast.LENGTH_LONG).show()
+
             } else
                 Toast.makeText(this, getString(R.string.qrupload_error), Toast.LENGTH_LONG).show()
         }
