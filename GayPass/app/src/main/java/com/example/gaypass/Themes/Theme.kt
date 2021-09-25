@@ -20,6 +20,8 @@ import androidx.core.view.get
 import com.example.gaypass.InfoActivity
 import com.example.gaypass.MainActivity
 import com.example.gaypass.SettingsActivity
+import com.example.gaypass.managers.SettingsManager
+import com.example.gaypass.utils.RandomGenerator
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 abstract class Theme(
@@ -28,14 +30,25 @@ abstract class Theme(
     private val accent: Int,
     private val bgText: Int,
     private val bgDrawable: List<Int>?,
-    val name: String
+    val name: String,
+    private val title: String = "GayPass"
     ) {
+        // companion object (static var) for EmojyOnlyOnStartup
+        // with this is possible to initialize the emojy once and make it the same for all Activities
+        companion object{
+            private var emojy: String = RandomGenerator.getRandomEmojy()
+        }
+
         private val SECONDARY_THRASHOLD = 53
+        private lateinit var settingsManager: SettingsManager
 
         // must be override and call super.applyTheme with the theme settings
         abstract fun apply()
 
         protected open fun applyTheme(context: Context, window: Window, view: View, actionBar: ActionBar) {
+            // init the settingManager
+            settingsManager = SettingsManager(context)
+
             // get Activity Gui first element
             val box_maincontent = (view as ViewGroup)[0]
 
@@ -66,6 +79,17 @@ abstract class Theme(
                 setRadioButtonsColors(context, box_maincontent, accent)
                 setSwitchesColors(context, box_maincontent, accent)
             }
+
+            // set title with random emojy
+            setRandomTitle(context)
+        }
+
+        private fun setRandomTitle(context: Context) {
+            // update emojy and check the EmojyOnlyStartup setting
+            if (!settingsManager.emojyOnlyOnStart)
+                emojy = RandomGenerator.getRandomEmojy()
+
+            (context as Activity).title = "$title $emojy"
         }
 
         protected open fun setRadioButtonsColors(context: Context, box_maincontent: View, primaryColor: Int) {

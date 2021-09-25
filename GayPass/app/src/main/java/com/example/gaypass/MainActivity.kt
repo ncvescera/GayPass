@@ -30,7 +30,7 @@ import java.io.File
 import java.io.FileOutputStream
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
-import com.example.gaypass.Utils.DialogMaker
+import com.example.gaypass.utils.DialogMaker
 import java.io.InputStream
 import java.nio.ByteBuffer
 
@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity() {
         */
 
         // apply current settings
-        setRandomTitle()            // change the Activity's title
+        //setRandomTitle()            // change the Activity's title
         themeManager.applyTheme()   // apply current theme
 
         // try to load the qr if previously stored
@@ -126,10 +126,6 @@ class MainActivity : AppCompatActivity() {
 
         themeManager.applyTheme()
 
-        // update Emojy title
-        if (!settingManager.emojyOnlyOnStart)
-            setRandomTitle()
-
         // redraw the quote
         if (isPassLoaded) {
             if (!settingManager.quotesOnlyOnStart || quoteTextView.text == "")
@@ -139,10 +135,6 @@ class MainActivity : AppCompatActivity() {
             if (!settingManager.soundOnlyOnStart)
                 playSound()
         }
-    }
-
-    private fun setRandomTitle() {
-        title = "${getString(R.string.app_name)} ${randomGenerator.getRandomEmojy()}"
     }
 
     private fun playSound() {
@@ -163,7 +155,7 @@ class MainActivity : AppCompatActivity() {
     // update the Quotes TextView with a random quote
     private fun printText() {
         // update the TextView with a random quote
-        quoteTextView.text = if (settingManager.noQuotes) "" else randomGenerator.getRandomQuote()
+        quoteTextView.text = if (settingManager.noQuotes) "" else RandomGenerator.getRandomQuote()
 
         // update the TextViews' visibility
         waringTextView.visibility = View.INVISIBLE

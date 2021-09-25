@@ -1,4 +1,4 @@
-package com.example.gaypass.Utils
+package com.example.gaypass.utils
 
 import android.app.AlertDialog
 import android.content.Context
