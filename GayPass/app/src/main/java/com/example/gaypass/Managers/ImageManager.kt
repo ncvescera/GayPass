@@ -12,6 +12,14 @@ import java.io.IOException
 class ImageManager(private val context: Context) {
     val DATA_PATH = "${context.filesDir.absoluteFile}/gaypass.png"
 
+    fun load(): Uri? {
+        // if the file exists return his uri
+        if (File(DATA_PATH).exists())
+            return Uri.parse(DATA_PATH)
+
+        return null
+    }
+
     fun save(uri: Uri) {
         val inputStream = context.contentResolver.openInputStream(uri)
         val output = FileOutputStream(File(DATA_PATH))

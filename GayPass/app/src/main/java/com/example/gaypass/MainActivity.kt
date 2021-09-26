@@ -1,14 +1,12 @@
 package com.example.gaypass
 
-import android.app.AlertDialog
-import android.content.DialogInterface
+
 import android.content.Intent
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -22,22 +20,11 @@ import androidx.core.content.ContextCompat
 import com.example.gaypass.managers.SettingsManager
 import com.example.gaypass.managers.ThemeManager
 import com.example.gaypass.utils.RandomGenerator
-import com.google.mlkit.vision.barcode.Barcode
-import com.google.mlkit.vision.barcode.BarcodeScannerOptions
-import com.google.mlkit.vision.barcode.BarcodeScanning
-import com.google.mlkit.vision.common.InputImage
 import java.io.File
-import java.io.FileOutputStream
 import android.graphics.Bitmap
-import android.graphics.ImageDecoder
 import com.example.gaypass.utils.DialogMaker
-import java.io.InputStream
-import java.nio.ByteBuffer
-import android.graphics.BitmapFactory
-import android.media.Image
 import com.example.gaypass.Managers.ImageManager
 import com.example.gaypass.utils.MLScanner
-import java.io.IOException
 
 
 class MainActivity : AppCompatActivity() {
@@ -51,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     // utils vars
     private lateinit var imageUri: Uri
     private          var isPassLoaded = false
-    private          var counter      = 0
+    //private          var counter      = 0
 
     // utils Objects
     private lateinit  var imageManager:     ImageManager
@@ -63,7 +50,6 @@ class MainActivity : AppCompatActivity() {
     // Constants
     private          val PICK_IMAGE = 100
     private          var MAX_VOL    = 100
-    //private lateinit var DATA_PATH: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,7 +74,6 @@ class MainActivity : AppCompatActivity() {
 
         // set path and volume values
         MAX_VOL = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)    // get the max level volume for Loud A.F. mode
-        //DATA_PATH = "${filesDir.absoluteFile}/gaypass.png"                      // get QR path
 
 
         // onClickListeners
@@ -98,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         /*
-        // ill leave this for the new easteregg !
+        // ill leave this for the new easter egg !
         imageView.setOnClickListener {
             if (counter < 10)
                 counter ++
@@ -110,7 +95,6 @@ class MainActivity : AppCompatActivity() {
         */
 
         // apply current settings
-        //setRandomTitle()            // change the Activity's title
         themeManager.applyTheme()   // apply current theme
 
         // try to load the qr if previously stored
@@ -137,7 +121,7 @@ class MainActivity : AppCompatActivity() {
             if (!settingManager.quotesOnlyOnStart || quoteTextView.text == "")
                 printText()
 
-            // Sounds Only on StrtUp
+            // Sounds Only on Startup
             if (!settingManager.soundOnlyOnStart)
                 playSound()
         }
@@ -282,12 +266,10 @@ class MainActivity : AppCompatActivity() {
 
                         // save the QR Code in the Private Storage
                         imageManager.save(imageUri)
-                        //saveUriToFile(imageUri)
                     }
                     else {
                         val bb = it[0].boundingBox              // takes the first qr detected
                         val bitmap = imageManager.URItoBitmap(imageUri)
-                        //val bitmap = URItoBitmap(imageUri)
 
                         val croppedBmp: Bitmap = Bitmap.createBitmap(
                             bitmap,
@@ -302,7 +284,6 @@ class MainActivity : AppCompatActivity() {
 
                         // save the QR Code in the Private Storage
                         imageManager.save(croppedBmp)
-                        //saveBitmapToFile(croppedBmp)
                     }
 
                     // set the Quotes TextView with a random quote
@@ -325,11 +306,11 @@ class MainActivity : AppCompatActivity() {
     // try to load the pass from the Private Storage (if exists)
     // Return True if correctly loaded, else False
     private fun loadPass(): Boolean {
-        // check if the file exists
-        val file = File(imageManager.DATA_PATH)
-        if (file.exists()) {
+        // check if uri given
+        val uri = imageManager.load()
+        if (uri != null) {
             // load the image and update the quotes TextView text
-            imageView.setImageURI(Uri.parse(imageManager.DATA_PATH))
+            imageView.setImageURI(uri)
             printText()
 
             return true
