@@ -33,6 +33,11 @@ import android.graphics.ImageDecoder
 import com.example.gaypass.utils.DialogMaker
 import java.io.InputStream
 import java.nio.ByteBuffer
+import android.graphics.BitmapFactory
+import android.media.Image
+import com.example.gaypass.Managers.ImageManager
+import com.example.gaypass.utils.MLScanner
+import java.io.IOException
 
 
 class MainActivity : AppCompatActivity() {
@@ -49,7 +54,7 @@ class MainActivity : AppCompatActivity() {
     private          var counter      = 0
 
     // utils Objects
-    private           val randomGenerator = RandomGenerator()
+    private lateinit  var imageManager:     ImageManager
     private lateinit  var audioManager:     AudioManager
     private lateinit  var mediaPlayer:      MediaPlayer
     private lateinit  var settingManager:   SettingsManager
@@ -58,7 +63,7 @@ class MainActivity : AppCompatActivity() {
     // Constants
     private          val PICK_IMAGE = 100
     private          var MAX_VOL    = 100
-    private lateinit var DATA_PATH: String
+    //private lateinit var DATA_PATH: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,14 +80,15 @@ class MainActivity : AppCompatActivity() {
         // init settingManager & setting the theme
         settingManager  = SettingsManager(this)
         themeManager    = ThemeManager(this, window, supportActionBar, layout)
+        imageManager    = ImageManager(this)
 
         // utils Object init
-        mediaPlayer     = MediaPlayer.create(this, R.raw.imgay)
+        mediaPlayer     =  MediaPlayer.create(this, R.raw.imgay)
         audioManager    =  getSystemService(android.content.Context.AUDIO_SERVICE) as AudioManager
 
         // set path and volume values
         MAX_VOL = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)    // get the max level volume for Loud A.F. mode
-        DATA_PATH = "${filesDir.absoluteFile}/gaypass.png"                      // get QR path
+        //DATA_PATH = "${filesDir.absoluteFile}/gaypass.png"                      // get QR path
 
 
         // onClickListeners
@@ -190,7 +196,7 @@ class MainActivity : AppCompatActivity() {
                     R.string.dialogMessage_deleteqr,
                     {
                         // delete the QR from the Private Storage
-                        val file = File(DATA_PATH)
+                        val file = File(imageManager.DATA_PATH)
                         val deleted: Boolean = file.delete()
 
                         if (deleted)
@@ -254,47 +260,60 @@ class MainActivity : AppCompatActivity() {
         // update the ImageView with the selected pic (if the operation is successfully)
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             if (data != null) {
+                // get data uri
                 imageUri = data.data!!
 
-                // init the barcode scanner
-                val options = BarcodeScannerOptions.Builder()
-                    .setBarcodeFormats(
-                        Barcode.FORMAT_QR_CODE
-                    )
-                    .build()
+                // init QR Scanner
+                val scanner = MLScanner(this)
 
-                // loading image from path and getting BarcodeScanner instance
-                val image = InputImage.fromFilePath(this, imageUri)
-                val scanner = BarcodeScanning.getClient(options)
+                // perform scan and execute success function
+                scanner.scan(imageUri) {
+                    if (it.isEmpty()) {
+                        DialogMaker.printDialog(
+                            this,
+                            "QR Warning",
+                            "It seems this image does not contain any QRCodes ...",
+                            {},
+                            {}
+                        )
 
-                // qrdetection on given image
-                val result = scanner.process(image)
-                    // Task completed successfully
-                    .addOnSuccessListener { barcodes ->
-                        // showing a waring error if no qr is detected
-                        if (barcodes.size <= 0)
-                            DialogMaker.printDialog(this, "QR Warning", "It seems this image does not contain any QRCodes ...", {}, {})
+                        // update ImageView image
+                        imageView.setImageURI(imageUri)
+
+                        // save the QR Code in the Private Storage
+                        imageManager.save(imageUri)
+                        //saveUriToFile(imageUri)
+                    }
+                    else {
+                        val bb = it[0].boundingBox              // takes the first qr detected
+                        val bitmap = imageManager.URItoBitmap(imageUri)
+                        //val bitmap = URItoBitmap(imageUri)
+
+                        val croppedBmp: Bitmap = Bitmap.createBitmap(
+                            bitmap,
+                            bb.left,
+                            bb.top,
+                            bb.width(),
+                            bb.height()
+                        )
+
+                        // update ImageView image
+                        imageView.setImageBitmap(croppedBmp)
+
+                        // save the QR Code in the Private Storage
+                        imageManager.save(croppedBmp)
+                        //saveBitmapToFile(croppedBmp)
                     }
 
-                    // Task failed with an exception
-                    .addOnFailureListener {
-                        Log.d("BARCODE", "ERROR !")
-                    }
+                    // set the Quotes TextView with a random quote
+                    printText()
 
-                // update ImageView image
-                imageView.setImageURI(imageUri)
+                    // says that the qr is loaded
+                    isPassLoaded = true
 
-                // set the Quotes TextView with a random quote
-                printText()
-
-                // save the QR Code in the Private Storage
-                saveUriToFile(imageUri)
-
-                // says that the qr is loaded
-                isPassLoaded = true
-
-                // showing success Toast
-                Toast.makeText(this, getString(R.string.qrupload_success), Toast.LENGTH_LONG).show()
+                    // showing success Toast
+                    Toast.makeText(this, getString(R.string.qrupload_success), Toast.LENGTH_LONG).show()
+                }
 
             } else
                 Toast.makeText(this, getString(R.string.qrupload_error), Toast.LENGTH_LONG).show()
@@ -307,23 +326,16 @@ class MainActivity : AppCompatActivity() {
     // Return True if correctly loaded, else False
     private fun loadPass(): Boolean {
         // check if the file exists
-        val file = File(DATA_PATH)
+        val file = File(imageManager.DATA_PATH)
         if (file.exists()) {
             // load the image and update the quotes TextView text
-            imageView.setImageURI(Uri.parse(DATA_PATH))
+            imageView.setImageURI(Uri.parse(imageManager.DATA_PATH))
             printText()
 
             return true
         }
 
         return false
-    }
-
-    // save the content of a given URI to Private Storage
-    private fun saveUriToFile(uri: Uri){
-        val inputStream = contentResolver.openInputStream(uri)
-        val output = FileOutputStream(File(DATA_PATH))
-        inputStream?.copyTo(output, 4 * 1024)
     }
 }
 
