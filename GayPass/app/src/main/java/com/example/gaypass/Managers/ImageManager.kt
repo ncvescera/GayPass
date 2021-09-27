@@ -1,4 +1,4 @@
-package com.example.gaypass.Managers
+package com.example.gaypass.managers
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -10,7 +10,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 
 class ImageManager(private val context: Context) {
-    val DATA_PATH = "${context.filesDir.absoluteFile}/gaypass.png"
+    val DATA_PATH: String = "${context.filesDir.absoluteFile}/gaypass.png"
 
     fun load(): Uri? {
         // if the file exists return his uri
@@ -18,6 +18,16 @@ class ImageManager(private val context: Context) {
             return Uri.parse(DATA_PATH)
 
         return null
+    }
+
+    // try to delete the QRCode file
+    // if success return True, else False
+    fun delete(): Boolean {
+        // delete the QR from the Private Storage
+        val file = File(DATA_PATH)
+        val deleted: Boolean = file.delete()
+
+        return deleted
     }
 
     fun save(uri: Uri) {

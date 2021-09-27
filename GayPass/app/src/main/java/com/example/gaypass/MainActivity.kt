@@ -20,10 +20,9 @@ import androidx.core.content.ContextCompat
 import com.example.gaypass.managers.SettingsManager
 import com.example.gaypass.managers.ThemeManager
 import com.example.gaypass.utils.RandomGenerator
-import java.io.File
 import android.graphics.Bitmap
 import com.example.gaypass.utils.DialogMaker
-import com.example.gaypass.Managers.ImageManager
+import com.example.gaypass.managers.ImageManager
 import com.example.gaypass.utils.MLScanner
 
 
@@ -179,37 +178,36 @@ class MainActivity : AppCompatActivity() {
                     R.string.dialogTitle_deleteqr,
                     R.string.dialogMessage_deleteqr,
                     {
-                        // delete the QR from the Private Storage
-                        val file = File(imageManager.DATA_PATH)
-                        val deleted: Boolean = file.delete()
-
-                        if (deleted)
+                        // try to delete the QR from the Private Storage
+                        if (imageManager.delete()) {
+                            // print success toast
                             Toast.makeText(
                                 this,
                                 getString(R.string.qrdelete_success),
                                 Toast.LENGTH_LONG
                             ).show()
+
+                            // clear the ImageView
+                            imageView.setImageDrawable(
+                                ContextCompat.getDrawable(
+                                    this, // Context
+                                    R.drawable.ic_baseline_image_search_24 // Drawable
+                                )
+                            )
+
+                            // update the TextViews visibilities
+                            quoteTextView.visibility = View.INVISIBLE
+                            waringTextView.visibility = View.VISIBLE
+
+                            // says that the qr is not loaded
+                            isPassLoaded = false
+                        }
                         else
                             Toast.makeText(
                                 this,
                                 getString(R.string.qrdelete_error),
                                 Toast.LENGTH_LONG
                             ).show()
-
-                        // clear the ImageView
-                        imageView.setImageDrawable(
-                            ContextCompat.getDrawable(
-                                this, // Context
-                                R.drawable.ic_baseline_image_search_24 // Drawable
-                            )
-                        )
-
-                        // update the TextViews visibilities
-                        quoteTextView.visibility = View.INVISIBLE
-                        waringTextView.visibility = View.VISIBLE
-
-                        // says that the qr is not loaded
-                        isPassLoaded = false
                     },
                     {}
                 )
