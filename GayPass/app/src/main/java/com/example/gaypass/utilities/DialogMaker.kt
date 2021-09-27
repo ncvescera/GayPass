@@ -50,6 +50,26 @@ class DialogMaker {
             }.show()
         }
 
+        // overloading with String Title and Message
+        fun printDialog(context: Context, title: String, message: String) {
+            context.let {
+                val builder = AlertDialog.Builder(it)
+                builder.apply {
+                    setPositiveButton("OK",
+                        DialogInterface.OnClickListener { dialog, id ->
+                        })
+                    setNegativeButton("Cancel",
+                        DialogInterface.OnClickListener { dialog, id ->
+                        })
+                    setTitle(title)
+                    setMessage(message)
+                }
+
+                // Create the AlertDialog
+                builder.create()
+            }.show()
+        }
+
     }
 
 }

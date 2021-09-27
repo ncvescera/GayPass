@@ -254,9 +254,7 @@ class MainActivity : AppCompatActivity() {
                         DialogMaker.printDialog(
                             this,
                             "QR Warning",
-                            "It seems this image does not contain any QRCodes ...",
-                            {},
-                            {}
+                            "It seems this image does not contain any QRCodes ..."
                         )
 
                         // update ImageView image
