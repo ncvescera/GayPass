@@ -268,20 +268,28 @@ class MainActivity : AppCompatActivity() {
                     else {
                         val bb = it[0].boundingBox              // takes the first qr detected
                         val bitmap = imageManager.URItoBitmap(imageUri)
+                        var result: Bitmap = bitmap             // at the end it will contains the original bitmap or
+                                                                // the cropped image if a boundingbox exists
 
-                        val croppedBmp: Bitmap = Bitmap.createBitmap(
-                            bitmap,
-                            bb.left,
-                            bb.top,
-                            bb.width(),
-                            bb.height()
-                        )
+                        // if a boundingbox exists, crop the qr
+                        if (bb != null) {
+                            val croppedBmp: Bitmap = Bitmap.createBitmap(
+                                bitmap,
+                                bb.left,
+                                bb.top,
+                                bb.width(),
+                                bb.height()
+                            )
+
+                            // set result with cropped bitmap
+                            result = croppedBmp
+                        }
 
                         // update ImageView image
-                        imageView.setImageBitmap(croppedBmp)
+                        imageView.setImageBitmap(result)
 
                         // save the QR Code in the Private Storage
-                        imageManager.save(croppedBmp)
+                        imageManager.save(result)
                     }
 
                     // set the Quotes TextView with a random quote
