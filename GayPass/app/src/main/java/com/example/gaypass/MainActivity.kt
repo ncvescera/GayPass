@@ -19,11 +19,11 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.example.gaypass.managers.SettingsManager
 import com.example.gaypass.managers.ThemeManager
-import com.example.gaypass.utils.RandomGenerator
+import com.example.gaypass.utilities.RandomGenerator
 import android.graphics.Bitmap
-import com.example.gaypass.utils.DialogMaker
+import com.example.gaypass.utilities.DialogMaker
 import com.example.gaypass.managers.ImageManager
-import com.example.gaypass.utils.MLScanner
+import com.example.gaypass.utilities.MLScanner
 
 
 class MainActivity : AppCompatActivity() {

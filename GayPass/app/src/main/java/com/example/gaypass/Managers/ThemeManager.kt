@@ -16,7 +16,7 @@ class ThemeManager(
     private var settingsManager: SettingsManager = SettingsManager(context)
 
     // all themes
-    val themes = listOf<Theme>(
+    val themes = listOf(
         DefaultTheme(context, window, view, actionBar!!),
         RainbowTheme(context, window, view, actionBar),
         GayestTheme(context, window, view, actionBar),

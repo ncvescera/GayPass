@@ -6,12 +6,7 @@ import android.content.SharedPreferences
 
 class SettingsManager(context: Context) {
     private var activity = context as Activity
-    private var sharedPref: SharedPreferences
-
-    init {
-        // init sharedPref object
-        sharedPref = activity.getSharedPreferences("settings", Context.MODE_PRIVATE)
-    }
+    private var sharedPref: SharedPreferences = activity.getSharedPreferences("settings", Context.MODE_PRIVATE)
 
     // --- PROP SECTION --- //
     // Proprieties for identifying the value on the SharedProprieties

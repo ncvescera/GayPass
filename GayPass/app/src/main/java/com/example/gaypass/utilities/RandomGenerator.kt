@@ -1,8 +1,8 @@
-package com.example.gaypass.utils
+package com.example.gaypass.utilities
 
 class RandomGenerator {
     companion object {
-        private val QUOTES = arrayListOf<String>(
+        private val QUOTES = arrayListOf(
             "I'M GAAAY !!",
             "BOOMER REMOVER",
             "I HAVE A CRIPPLING DEPRESSION",
@@ -30,7 +30,7 @@ class RandomGenerator {
             "USE ME!"
         )
 
-        private val EMOJYS = arrayListOf<String>(
+        private val EMOJYS = arrayListOf(
             "\uD83E\uDD84",                                             // unicorn
             "\uD83C\uDF38",                                             // pink flower
             "\uD83D\uDC9E",                                             // hearts
@@ -39,7 +39,7 @@ class RandomGenerator {
             "\uD83D\uDC90",                                             // bouquet
             "\uD83D\uDC68\u200D❤️\u200D\uD83D\uDC8B\u200D\uD83D\uDC68", // gay kiss
             "\uD83C\uDF08",                                             // rainbow
-            "\uD83C\uDFF3️\u200D\uD83C\uDF08",                           // rainbowflag
+            "\uD83C\uDFF3️\u200D\uD83C\uDF08",                           // rainbow flag
             "\uD83C\uDF6D",                                             // lollipop
             "\uD83E\uDD20",                                             // cowboy
             "\uD83D\uDCA6",                                             //  sweat droplets
@@ -63,8 +63,8 @@ class RandomGenerator {
             "\uD83E\uDD56",                                             // baguette
             "\uD83C\uDF2D",                                             // hot dog
             "\uD83C\uDFBA",                                             // trumpet
-            "\u26A7",                                                   // Trasgender symbol
-            "\uD83C\uDDEB\uD83C\uDDF7"                                  // franch flag
+            "\u26A7",                                                   // Transgender symbol
+            "\uD83C\uDDEB\uD83C\uDDF7"                                  // french flag
         )
 
         fun getRandomQuote(): String {

@@ -1,8 +1,7 @@
-package com.example.gaypass.utils
+package com.example.gaypass.utilities
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 
 class DialogMaker {
     companion object {
@@ -11,14 +10,12 @@ class DialogMaker {
             context.let {
                 val builder = AlertDialog.Builder(it)
                 builder.apply {
-                    setPositiveButton("OK",
-                        DialogInterface.OnClickListener { dialog, id ->
-                            success_function()
-                        })
-                    setNegativeButton("Cancel",
-                        DialogInterface.OnClickListener { dialog, id ->
+                    setPositiveButton("OK") { dialog, id ->
+                        success_function()
+                    }
+                    setNegativeButton("Cancel") { dialog, id ->
                             fail_function()
-                        })
+                    }
                     setTitle(title)
                     setMessage(message)
                 }
@@ -33,14 +30,12 @@ class DialogMaker {
             context.let {
                 val builder = AlertDialog.Builder(it)
                 builder.apply {
-                    setPositiveButton("OK",
-                        DialogInterface.OnClickListener { dialog, id ->
-                            success_function()
-                        })
-                    setNegativeButton("Cancel",
-                        DialogInterface.OnClickListener { dialog, id ->
-                            fail_function()
-                        })
+                    setPositiveButton("OK") { dialog, id ->
+                        success_function()
+                    }
+                    setNegativeButton("Cancel") { dialog, id ->
+                        fail_function()
+                    }
                     setTitle(title)
                     setMessage(message)
                 }
@@ -55,12 +50,8 @@ class DialogMaker {
             context.let {
                 val builder = AlertDialog.Builder(it)
                 builder.apply {
-                    setPositiveButton("OK",
-                        DialogInterface.OnClickListener { dialog, id ->
-                        })
-                    setNegativeButton("Cancel",
-                        DialogInterface.OnClickListener { dialog, id ->
-                        })
+                    setPositiveButton("OK") { dialog, id -> }
+                    setNegativeButton("Cancel") { dialog, id -> }
                     setTitle(title)
                     setMessage(message)
                 }

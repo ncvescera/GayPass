@@ -139,12 +139,12 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun generateThemesButtons() {
-        var radioButtons = arrayListOf<RadioButton>()                         // list for storing all the radio buttons
+        val radioButtons = arrayListOf<RadioButton>()                         // list for storing all the radio buttons
         val radioGroup   = findViewById<RadioGroup>(R.id.radioGroup_themes)   // radioGroup in the Activity
 
         for (i in themeManager.themes.indices) {
             // create new Radio Button
-            var tmp = RadioButton(this)
+            val tmp = RadioButton(this)
 
             // set text
             tmp.text = themeManager.themes[i].name

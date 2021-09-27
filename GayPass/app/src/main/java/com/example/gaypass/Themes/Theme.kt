@@ -1,6 +1,5 @@
 package com.example.gaypass.themes
 
-import android.R
 import androidx.appcompat.app.ActionBar
 import android.app.Activity
 import android.content.Context
@@ -21,7 +20,7 @@ import com.example.gaypass.InfoActivity
 import com.example.gaypass.MainActivity
 import com.example.gaypass.SettingsActivity
 import com.example.gaypass.managers.SettingsManager
-import com.example.gaypass.utils.RandomGenerator
+import com.example.gaypass.utilities.RandomGenerator
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 abstract class Theme(
@@ -105,8 +104,8 @@ abstract class Theme(
                             // set button colors
                             tmp.buttonTintList = ColorStateList(
                                 arrayOf(
-                                    intArrayOf(-R.attr.state_enabled),
-                                    intArrayOf(R.attr.state_checked),
+                                    intArrayOf(-android.R.attr.state_enabled),
+                                    intArrayOf(android.R.attr.state_checked),
                                     intArrayOf()
                                 ),
                                 intArrayOf(
@@ -136,8 +135,8 @@ abstract class Theme(
                         // set checked/unchecked primary colors
                         child.thumbTintList = ColorStateList(
                             arrayOf(
-                                intArrayOf(-R.attr.state_enabled),
-                                intArrayOf(R.attr.state_checked),
+                                intArrayOf(-android.R.attr.state_enabled),
+                                intArrayOf(android.R.attr.state_checked),
                                 intArrayOf()
                             ),
                             intArrayOf(
@@ -150,7 +149,7 @@ abstract class Theme(
                         // set checked/unchecked secondary colors
                         val t = ColorStateList(
                             arrayOf(
-                                intArrayOf(R.attr.state_checked),
+                                intArrayOf(android.R.attr.state_checked),
                                 intArrayOf()
                             ),
                             intArrayOf(
@@ -161,7 +160,7 @@ abstract class Theme(
                         )
 
                         // set child final colors
-                        child.trackTintList = t;
+                        child.trackTintList = t
                     }
                 }
             }
@@ -178,7 +177,7 @@ abstract class Theme(
                     view.background = ContextCompat.getDrawable(context, bgs[0])
                 }
                 bgs.size == 3 -> {
-                    // set custom bg for different activityes
+                    // set custom bg for different activities
                     when (context as Activity) {
                         is MainActivity -> {
                             view.background = ContextCompat.getDrawable(context, bgs[0])

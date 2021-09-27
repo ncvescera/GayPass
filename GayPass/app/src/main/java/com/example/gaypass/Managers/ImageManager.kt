@@ -10,7 +10,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 
 class ImageManager(private val context: Context) {
-    val DATA_PATH: String = "${context.filesDir.absoluteFile}/gaypass.png"
+    private val DATA_PATH: String = "${context.filesDir.absoluteFile}/gaypass.png"
 
     fun load(): Uri? {
         // if the file exists return his uri

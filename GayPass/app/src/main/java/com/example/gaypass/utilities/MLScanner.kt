@@ -1,4 +1,4 @@
-package com.example.gaypass.utils
+package com.example.gaypass.utilities
 
 import android.content.Context
 import android.net.Uri
